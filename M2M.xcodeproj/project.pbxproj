@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		405A26E21BF2896C0018818C /* FriendListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26E11BF2896B0018818C /* FriendListTableViewController.swift */; };
 		405A26E41BF28B4E0018818C /* ViewFriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26E31BF28B4E0018818C /* ViewFriendProfileViewController.swift */; };
 		405A26E61BF28B8B0018818C /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26E51BF28B8B0018818C /* SearchFriendViewController.swift */; };
 		405A26E81BF28F130018818C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26E71BF28F130018818C /* UserProfileViewController.swift */; };
 		405A26EC1BF2947D0018818C /* SampleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 405A26EB1BF2947D0018818C /* SampleImage.png */; };
 		405A26EE1BF297FA0018818C /* MusicLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */; };
+		405A26F01BF2A3390018818C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26EF1BF2A3390018818C /* LoginViewController.swift */; };
+		405A26F21BF2A3700018818C /* FriendListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26F11BF2A3700018818C /* FriendListTableViewController.swift */; };
 		407859A71BF2599B003F122B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407859A61BF2599B003F122B /* AppDelegate.swift */; };
 		407859AC1BF2599B003F122B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407859AA1BF2599B003F122B /* Main.storyboard */; };
 		407859AF1BF2599B003F122B /* M2M.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 407859AD1BF2599B003F122B /* M2M.xcdatamodeld */; };
@@ -27,7 +28,6 @@
 		407859E21BF259B6003F122B /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859DB1BF259B6003F122B /* ParseFacebookUtilsV4.framework */; };
 		407859E31BF259B6003F122B /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859DC1BF259B6003F122B /* ParseTwitterUtils.framework */; };
 		407859E41BF259B6003F122B /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859DD1BF259B6003F122B /* ParseUI.framework */; };
-		407859E61BF259C0003F122B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407859E51BF259C0003F122B /* LoginViewController.swift */; };
 		407859E81BF25B2A003F122B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859E71BF25B2A003F122B /* AudioToolbox.framework */; };
 		407859EA1BF25B37003F122B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859E91BF25B37003F122B /* CFNetwork.framework */; };
 		407859EC1BF25B42003F122B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859EB1BF25B42003F122B /* CoreGraphics.framework */; };
@@ -58,12 +58,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		405A26E11BF2896B0018818C /* FriendListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		405A26E31BF28B4E0018818C /* ViewFriendProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFriendProfileViewController.swift; sourceTree = "<group>"; };
 		405A26E51BF28B8B0018818C /* SearchFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
 		405A26E71BF28F130018818C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		405A26EB1BF2947D0018818C /* SampleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleImage.png; sourceTree = "<group>"; };
 		405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicLibraryViewController.swift; sourceTree = "<group>"; };
+		405A26EF1BF2A3390018818C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		405A26F11BF2A3700018818C /* FriendListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewController.swift; sourceTree = "<group>"; };
 		407859A31BF2599B003F122B /* M2M.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M2M.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407859A61BF2599B003F122B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		407859AB1BF2599B003F122B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		407859DB1BF259B6003F122B /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		407859DC1BF259B6003F122B /* ParseTwitterUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseTwitterUtils.framework; sourceTree = "<group>"; };
 		407859DD1BF259B6003F122B /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		407859E51BF259C0003F122B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
 		407859E71BF25B2A003F122B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		407859E91BF25B37003F122B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		407859EB1BF25B42003F122B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -179,13 +179,13 @@
 		407859A51BF2599B003F122B /* M2M */ = {
 			isa = PBXGroup;
 			children = (
-				407859E51BF259C0003F122B /* LoginViewController.swift */,
+				405A26EF1BF2A3390018818C /* LoginViewController.swift */,
 				407859A61BF2599B003F122B /* AppDelegate.swift */,
 				407859AA1BF2599B003F122B /* Main.storyboard */,
 				405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */,
 				405A26EB1BF2947D0018818C /* SampleImage.png */,
 				405A26E71BF28F130018818C /* UserProfileViewController.swift */,
-				405A26E11BF2896B0018818C /* FriendListTableViewController.swift */,
+				405A26F11BF2A3700018818C /* FriendListTableViewController.swift */,
 				405A26E31BF28B4E0018818C /* ViewFriendProfileViewController.swift */,
 				405A26E51BF28B8B0018818C /* SearchFriendViewController.swift */,
 				407859B01BF2599B003F122B /* Assets.xcassets */,
@@ -346,9 +346,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				405A26F01BF2A3390018818C /* LoginViewController.swift in Sources */,
+				405A26F21BF2A3700018818C /* FriendListTableViewController.swift in Sources */,
 				405A26EE1BF297FA0018818C /* MusicLibraryViewController.swift in Sources */,
-				407859E61BF259C0003F122B /* LoginViewController.swift in Sources */,
-				405A26E21BF2896C0018818C /* FriendListTableViewController.swift in Sources */,
 				405A26E81BF28F130018818C /* UserProfileViewController.swift in Sources */,
 				407859A71BF2599B003F122B /* AppDelegate.swift in Sources */,
 				405A26E41BF28B4E0018818C /* ViewFriendProfileViewController.swift in Sources */,
