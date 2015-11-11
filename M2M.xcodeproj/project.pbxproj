@@ -38,6 +38,7 @@
 		407859F61BF25B86003F122B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859F51BF25B86003F122B /* SystemConfiguration.framework */; };
 		407859F81BF25B9F003F122B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859F71BF25B9E003F122B /* libz.tbd */; };
 		407859FA1BF25BAC003F122B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859F91BF25BAC003F122B /* libsqlite3.tbd */; };
+		437C2F321BF36BFB0018F362 /* AudioEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		407859F51BF25B86003F122B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		407859F71BF25B9E003F122B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		407859F91BF25BAC003F122B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				405A26EF1BF2A3390018818C /* LoginViewController.swift */,
 				407859A61BF2599B003F122B /* AppDelegate.swift */,
 				407859AA1BF2599B003F122B /* Main.storyboard */,
+				437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */,
 				405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */,
 				405A26EB1BF2947D0018818C /* SampleImage.png */,
 				405A26E71BF28F130018818C /* UserProfileViewController.swift */,
@@ -349,6 +352,7 @@
 				405A26F01BF2A3390018818C /* LoginViewController.swift in Sources */,
 				405A26F21BF2A3700018818C /* FriendListTableViewController.swift in Sources */,
 				405A26EE1BF297FA0018818C /* MusicLibraryViewController.swift in Sources */,
+				437C2F321BF36BFB0018F362 /* AudioEditorViewController.swift in Sources */,
 				405A26E81BF28F130018818C /* UserProfileViewController.swift in Sources */,
 				407859A71BF2599B003F122B /* AppDelegate.swift in Sources */,
 				405A26E41BF28B4E0018818C /* ViewFriendProfileViewController.swift in Sources */,
