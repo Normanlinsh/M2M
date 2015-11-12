@@ -17,6 +17,7 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var userId: UILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
     
+    //logout button
     @IBAction func logout(sender: AnyObject) {
         PFUser.logOut()
         performSegueWithIdentifier("logOutSegue", sender: self)
@@ -27,11 +28,12 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //set username label to current user's username
         username.text = PFUser.currentUser()?.username
         
+        //the following query attempts to fetch current's profile image on Parse
         let query = PFQuery(className: "userData")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
                 let image = PFImageView()
@@ -57,6 +59,7 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
         // Dispose of any resources that can be recreated.
     }
     
+    //function to call a new view controller for picking image from local photo library and set it to user's profile picture
     @IBAction func updateProfilePicture(sender: AnyObject) {
         let image = UIImagePickerController()
         image.delegate = self
@@ -69,9 +72,9 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         self.dismissViewControllerAnimated(true, completion: nil)
         
+        //the following query attempts to save the choosen image from local photo library to Parse
         let query = PFQuery(className:"userData")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
                 object!["profileImage"] = PFFile(name: "userProfileImage", data: UIImageJPEGRepresentation(image, 0.5)!)
@@ -81,7 +84,6 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
                 print(error)
             }
         }
-        
         
         self.userProfileImage.image = image
     }

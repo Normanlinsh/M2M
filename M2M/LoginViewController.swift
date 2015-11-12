@@ -28,12 +28,18 @@ class LoginViewController: UIViewController {
     
     @IBAction func login_signUp(sender: AnyObject) {
         
+        //error checking, if invalid username or password, display alert
         if usernameText.text == "" || passwordText.text == "" {
                 displayAlert("Error In Field", message: "Please enter a username and password")
+            
+        //else sign the user up or login, depending on the mode
         } else {
             
+            //if user is in sign up mode
             if signUpActive == true {
                 
+                //create activity indicator (the spin circle thing when
+                //user login to indicate that the system is running)
                 activitiyIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
                 activitiyIndicator.center = self.view.center
                 activitiyIndicator.hidesWhenStopped = true
@@ -42,17 +48,21 @@ class LoginViewController: UIViewController {
                 activitiyIndicator.startAnimating()
                 UIApplication.sharedApplication().beginIgnoringInteractionEvents()
                 
+                //create a new user
                 let user = PFUser()
                 user.username = usernameText.text
                 user.password = passwordText.text
                 
                 var errorMsg = "Please Try Again Later"
                 
+                //tries to sign the user up
                 user.signUpInBackgroundWithBlock({ (success, error) -> Void in
                     
+                    //ends activity indicator
                     self.activitiyIndicator.stopAnimating()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
+                    //if successful
                     if error == nil {
                         //sign up successful
                         
@@ -62,19 +72,18 @@ class LoginViewController: UIViewController {
                         userData["profileImage"] = PFFile(name: "userProfileImage", data: UIImageJPEGRepresentation(placeholderImage, 0.5)!)
                         userData["friendList"] = []
                         userData["username"] = self.usernameText.text
-                        //userData.ACL = PFACL.ACLWithUser(PFUser.currentUser()!)
                         userData.saveInBackgroundWithBlock {
                             (success: Bool, error: NSError?) -> Void in
                             if (success) {
+                                //if user is successfully created and saved on Parse, perform segue
+                                self.performSegueWithIdentifier("loginSegue", sender: self)
                                 self.currentUser = self.usernameText.text!
                             } else {
                                 print(error)
                             }
                         }
                         
-                        //self.currentUser = PFUser.currentUser()!
-                        self.performSegueWithIdentifier("loginSegue", sender: self)
-                        
+                    //if not successful, alert the error message
                     } else {
                         if let errorString = error!.userInfo["error"] as? String {
                             errorMsg = errorString
@@ -82,9 +91,12 @@ class LoginViewController: UIViewController {
                             self.displayAlert("Failed Sign up", message: errorMsg)
                     }
                 })
-                
+            
+            //log in mode
             } else {
                 
+                //create activity indicator (the spin circle thing when
+                //user login to indicate that the system is running)
                 activitiyIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
                 activitiyIndicator.center = self.view.center
                 activitiyIndicator.hidesWhenStopped = true
@@ -93,25 +105,24 @@ class LoginViewController: UIViewController {
                 activitiyIndicator.startAnimating()
                 UIApplication.sharedApplication().beginIgnoringInteractionEvents()
                 
-                
+                //attempts to log the user in
                 PFUser.logInWithUsernameInBackground(usernameText.text!, password: passwordText.text!, block: { (user, error) -> Void in
                     
+                    //ends activitiy indicator
                     self.activitiyIndicator.stopAnimating()
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
                     if user != nil {
-                        //logged in
-                        
-                        //self.currentUser = PFUser.currentUser()!
+                        //logged in, so perform segue
                         self.performSegueWithIdentifier("loginSegue", sender: self)
                         
-                        
                     } else {
+                        //login unsuccessful, alert error message
                         var errorMsg = "Login failed"
                         if let errorString = error!.userInfo["error"] as? String {
                             errorMsg = errorString
                         }
-                            self.displayAlert("Failed Login", message: errorMsg)
+                        self.displayAlert("Failed Login", message: errorMsg)
                     }
                 })
             }
@@ -119,6 +130,7 @@ class LoginViewController: UIViewController {
     }
     
     
+    //alert function
     @available(iOS 8.0, *)
     func displayAlert(title:String, message:String) {
         
@@ -133,6 +145,7 @@ class LoginViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    //button for switching the mode between login and sign up
     @IBAction func switchMode(sender: AnyObject) {
         
         if (signUpActive == true) {
@@ -173,10 +186,10 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        //perform segue to tabviewController if a user is already logged in
         if currentUser != "" && currentUser != "no_UsEr"{
             performSegueWithIdentifier("loginSegue", sender: self)
-            //print(currentUser)
-            //print(passedName)
         }
     }
 

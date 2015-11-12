@@ -25,7 +25,7 @@ class ViewFriendProfileViewController: UIViewController {
             username.text = self.passedName     //passed username from prepareForSegue
         }
         
-        //load profileImage from query from parse
+        // load profileImage from query from parse
         let query = PFQuery(className: "userData")
         query.whereKey("username", equalTo: username.text!)
         
@@ -46,7 +46,7 @@ class ViewFriendProfileViewController: UIViewController {
             }
         }
         
-        //if username exists in currentUser's friendList, set isFollowing to true
+        // if username exists in currentUser's friendList, set isFollowing to true
         let query2 = PFQuery(className: "userData")
         query2.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
         
@@ -86,6 +86,7 @@ class ViewFriendProfileViewController: UIViewController {
         
         if addFriendButton.titleLabel!.text == "Unfriend" {
             
+            // the following query remove the selected user from current user's friendlist
             query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
                 if error == nil {
                     object?.removeObjectsInArray([self.username.text!], forKey: "friendList")
@@ -98,6 +99,8 @@ class ViewFriendProfileViewController: UIViewController {
             isFollowing = false
             
         } else {
+            
+            // the following query add the selected user to current user's friendlist
             query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
                 if error == nil {
                     object?.addObject(self.username.text!, forKey: "friendList")

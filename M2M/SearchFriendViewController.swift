@@ -24,8 +24,8 @@ class SearchFriendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // the following query fetch all the users from Parse and store them in data[]
         let query = PFUser.query()
-        
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if let users = objects {
                 
@@ -59,7 +59,8 @@ class SearchFriendViewController: UIViewController {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText : String) {
         
-        filtered  = data.filter({ (text) -> Bool in
+        // filters the data from data[] (by the userinput in searchbar)
+        filtered = data.filter({ (text) -> Bool in
             let tmp: NSString = text
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
@@ -128,6 +129,7 @@ class SearchFriendViewController: UIViewController {
         return cell
     }
     
+    // function to perform segue when a cell is selected
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         selectedUser = indexPath.row
@@ -135,7 +137,7 @@ class SearchFriendViewController: UIViewController {
         
     }
     
-    
+    // function to pass information about the selected user to the new viewUserProfileViewController view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if (segue.identifier == "viewFriendProfileSearchSegue"){

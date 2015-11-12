@@ -23,11 +23,12 @@ class FriendListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //pull to refresh
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
+        //the following query attempts to store current user's friendlist and present it to table view
         let query = PFQuery(className: "userData")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
         query.getFirstObjectInBackgroundWithBlock ({ (object, error) -> Void in
             if error == nil {
                 if let friends = object!["friendList"] as? NSArray {
@@ -92,8 +93,12 @@ class FriendListTableViewController: UITableViewController {
         
         cell.textLabel?.text = friendsList[indexPath.row]
         
+        //place holder image
         let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
         
+        
+        //the following query attempts to fetch the profileImage from each cell's user and place it next to the cell
+        //***works partially, needs to be debugged***
         /*
         let query = PFQuery(className: "userData")
         query.whereKey("username", equalTo: usernames[indexPath.row])
@@ -116,7 +121,7 @@ class FriendListTableViewController: UITableViewController {
         */
 
         
-        
+        //place holder image
         cell.imageView?.image = cellImage
 
         return cell
@@ -127,6 +132,7 @@ class FriendListTableViewController: UITableViewController {
         performSegueWithIdentifier("viewFriendProfileSegue", sender: self)
     }
     
+    //pass selected user information to the next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "viewFriendProfileSegue"){
             
@@ -144,13 +150,15 @@ class FriendListTableViewController: UITableViewController {
         
     }
     
+    //pull to refresh function
     func refresh(sender: AnyObject) {
         
+        //clear the friend list to repopulate it
         friendsList = []
         
+        //repopulate the new friendlist, there's definitely a more efficient way to do this, but i'm too lazy...
         let query = PFQuery(className: "userData")
         query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-        
         query.getFirstObjectInBackgroundWithBlock ({ (object, error) -> Void in
             if error == nil {
                 if let friends = object!["friendList"] as? NSArray {
@@ -161,6 +169,7 @@ class FriendListTableViewController: UITableViewController {
             } else {
                 print(error)
             }
+            //reload the tableview with the new friendlist
             self.tableView.reloadData()
         })
         
