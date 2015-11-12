@@ -62,6 +62,7 @@ class LoginViewController: UIViewController {
                         userData["profileImage"] = PFFile(name: "userProfileImage", data: UIImageJPEGRepresentation(placeholderImage, 0.5)!)
                         userData["friendList"] = []
                         userData["username"] = self.usernameText.text
+                        //userData.ACL = PFACL.ACLWithUser(PFUser.currentUser()!)
                         userData.saveInBackgroundWithBlock {
                             (success: Bool, error: NSError?) -> Void in
                             if (success) {

@@ -8,42 +8,60 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class FriendListTableViewController: UITableViewController {
     
-    var usernames : [String] = [""]
-    var userIds : [String] = [""]
+    var usernames : [String] = []
+    var userIds : [String] = []
+    var friendsList : [String] = []
+    
+    //var refresh_Control:UIRefreshControl!
     
     var selectedUser = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
+        let query = PFQuery(className: "userData")
+        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        
+        query.getFirstObjectInBackgroundWithBlock ({ (object, error) -> Void in
+            if error == nil {
+                if let friends = object!["friendList"] as? NSArray {
+                    for friend in friends {
+                        self.friendsList.append(friend as! String)
+                    }
+                }
+            } else {
+                print(error)
+            }
+            self.tableView.reloadData()
+        })
+        
+        /*
         let query = PFUser.query()
         
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if let users = objects {
-                
                 self.userIds.removeAll(keepCapacity: true)
                 self.usernames.removeAll(keepCapacity: true)
-                
+        
                 for object in users {
-                    
                     if let user = object as? PFUser {
-                        
                         if user.objectId! != PFUser.currentUser()?.objectId {
-                            
                             self.usernames.append(user.username!)
                             self.userIds.append(user.objectId!)
-                            
                         }
                     }
                 }
             }
-
         self.tableView.reloadData()
-
         })
+        */
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -65,23 +83,47 @@ class FriendListTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return userIds.count
+        return friendsList.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("friendsListCell", forIndexPath: indexPath)
-
-        cell.textLabel?.text = usernames[indexPath.row]
         
-        //let image = UIImage(named: "FriendListIcon")
-        //cell.imageView?.image = image
+        cell.textLabel?.text = friendsList[indexPath.row]
+        
+        let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
+        
+        /*
+        let query = PFQuery(className: "userData")
+        query.whereKey("username", equalTo: usernames[indexPath.row])
+        
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                let image = PFImageView()
+                image.file = object!["profileImage"] as? PFFile
+                image.loadInBackground({ (photo, error) -> Void in
+                    if error == nil {
+                        cellImage = photo!
+                    } else {
+                        print(error)
+                    }
+                })
+            } else {
+                print(error)
+            }
+        }
+        */
+
+        
+        
+        cell.imageView?.image = cellImage
 
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.selectedUser = usernames[indexPath.row]
+        self.selectedUser = friendsList[indexPath.row]
         performSegueWithIdentifier("viewFriendProfileSegue", sender: self)
     }
     
@@ -93,15 +135,37 @@ class FriendListTableViewController: UITableViewController {
             svc.isFollowing = true
         }
         
-        if (segue.identifier == "viewFriendProfileSeaerchSegue"){
+        /*if (segue.identifier == "viewFriendProfileSeaerchSegue"){
             
             let svc = segue.destinationViewController as! ViewFriendProfileViewController;
             svc.passedName = self.selectedUser;
             svc.isFollowing = false     //will cause friends that are searched to be false, need to fix!!
-        }
+        }*/
         
     }
     
+    func refresh(sender: AnyObject) {
+        
+        friendsList = []
+        
+        let query = PFQuery(className: "userData")
+        query.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+        
+        query.getFirstObjectInBackgroundWithBlock ({ (object, error) -> Void in
+            if error == nil {
+                if let friends = object!["friendList"] as? NSArray {
+                    for friend in friends {
+                        self.friendsList.append(friend as! String)
+                    }
+                }
+            } else {
+                print(error)
+            }
+            self.tableView.reloadData()
+        })
+        
+        self.refreshControl?.endRefreshing()
+    }
 
     /*
     // Override to support conditional editing of the table view.

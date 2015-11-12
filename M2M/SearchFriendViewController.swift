@@ -96,6 +96,35 @@ class SearchFriendViewController: UIViewController {
         }*/
         cell.textLabel?.text = filtered[indexPath.row]
         
+        
+        let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
+        
+        
+        // the following code attempts to fecth proflileImage from each user and display them next to the cell
+        /*
+        let query = PFQuery(className: "userData")
+        query.whereKey("username", equalTo: usernames[indexPath.row])
+        
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                let image = PFImageView()
+                image.file = object!["profileImage"] as? PFFile
+                image.loadInBackground({ (photo, error) -> Void in
+                    if error == nil {
+                        cellImage = photo!
+                    } else {
+                        print(error)
+                    }
+                })
+            } else {
+                print(error)
+            }
+        }
+        */
+        
+        cell.imageView?.image = cellImage
+
+        
         return cell
     }
     

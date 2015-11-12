@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 class ViewFriendProfileViewController: UIViewController {
 
@@ -20,8 +22,51 @@ class ViewFriendProfileViewController: UIViewController {
         super.viewDidLoad()
 
         if passedName != "" {
-            username.text = self.passedName
+            username.text = self.passedName     //passed username from prepareForSegue
         }
+        
+        //load profileImage from query from parse
+        let query = PFQuery(className: "userData")
+        query.whereKey("username", equalTo: username.text!)
+        
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                //if username exists in currentUser's friendList, set isFollowing to true
+                if let friends = object!["friendList"] as? NSArray {
+                    for friend in friends {
+                        if friend as? String == self.username.text {
+                            self.isFollowing = true
+                            print(self.isFollowing)
+                        }
+                    }
+                }
+
+                
+                
+                //fetch image from parse
+                let image = PFImageView()
+                image.file = object!["profileImage"] as? PFFile
+                image.loadInBackground({ (photo, error) -> Void in
+                    if error == nil {
+                        self.userProfileImage.image = photo!
+                    } else {
+                        print(error)
+                    }
+                })
+            } else {
+                print(error)
+            }
+        }
+        
+        print(isFollowing)
+        
+        //set the button title
+        if isFollowing {
+           addFriendButton.setTitle("Unfriend", forState: .Normal)
+        } else {
+            addFriendButton.setTitle("Friend", forState: .Normal)
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -30,10 +75,41 @@ class ViewFriendProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var sendFriendRequest: UIButton!
-    @IBAction func sendFriendRequest(sender: AnyObject) {
+    @IBOutlet weak var addFriendButton: UIButton!
+    
+    @IBAction func addFriend(sender: AnyObject) {
         
+        let query = PFQuery(className: "userData")
+        query.whereKey("username", equalTo: (PFUser.currentUser()?.username!)!)
+        
+        
+        if isFollowing {
+            
+            query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+                if error == nil {
+                    object?.removeObjectsInArray([self.username.text!], forKey: "friendList")
+                    object?.saveInBackground()
+                } else {
+                    print(error)
+                }
+            }
+            addFriendButton.setTitle("Friend", forState: .Normal)
+            isFollowing = false
+            
+        } else {
+            query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+                if error == nil {
+                    object?.addObject(self.username.text!, forKey: "friendList")
+                    object?.saveInBackground()
+                } else {
+                    print(error)
+                }
+            }
+            addFriendButton.setTitle("Unfriend", forState: .Normal)
+            isFollowing = true
+        }
     }
+    
 
     /*
     // MARK: - Navigation

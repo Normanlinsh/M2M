@@ -76,6 +76,7 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
             if error == nil {
                 object!["profileImage"] = PFFile(name: "userProfileImage", data: UIImageJPEGRepresentation(image, 0.5)!)
                 object?.saveInBackground()
+                print("uploaded")
             } else {
                 print(error)
             }
