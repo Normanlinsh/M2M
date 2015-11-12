@@ -31,18 +31,6 @@ class ViewFriendProfileViewController: UIViewController {
         
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
-                //if username exists in currentUser's friendList, set isFollowing to true
-                if let friends = object!["friendList"] as? NSArray {
-                    for friend in friends {
-                        if friend as? String == self.username.text {
-                            self.isFollowing = true
-                            print(self.isFollowing)
-                        }
-                    }
-                }
-
-                
-                
                 //fetch image from parse
                 let image = PFImageView()
                 image.file = object!["profileImage"] as? PFFile
@@ -58,13 +46,26 @@ class ViewFriendProfileViewController: UIViewController {
             }
         }
         
-        print(isFollowing)
+        //if username exists in currentUser's friendList, set isFollowing to true
+        let query2 = PFQuery(className: "userData")
+        query2.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
         
-        //set the button title
-        if isFollowing {
-           addFriendButton.setTitle("Unfriend", forState: .Normal)
-        } else {
-            addFriendButton.setTitle("Friend", forState: .Normal)
+        query2.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+
+            if let friends = object!["friendList"] as? NSArray {
+                print(friends)
+                for friend in friends {
+                    if friend as? String == self.username.text {
+                        self.isFollowing = true
+                    }
+                }
+                // set the button title
+                if self.isFollowing {
+                    self.addFriendButton.setTitle("Unfriend", forState: .Normal)
+                } else {
+                    self.addFriendButton.setTitle("Friend", forState: .Normal)
+                }
+            }
         }
         
         // Do any additional setup after loading the view.
@@ -83,7 +84,7 @@ class ViewFriendProfileViewController: UIViewController {
         query.whereKey("username", equalTo: (PFUser.currentUser()?.username!)!)
         
         
-        if isFollowing {
+        if addFriendButton.titleLabel!.text == "Unfriend" {
             
             query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
                 if error == nil {
