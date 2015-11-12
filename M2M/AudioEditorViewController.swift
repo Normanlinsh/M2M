@@ -28,11 +28,13 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         super.viewDidLoad()
         
         //Experimenting
+        /*
         var Sound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("", ofType: "wav"))
         var error:NSError?
         audioPlayer = AVAudioPlayer(contentsOfURL: Sound, error: &error)
         audioPlayer.prepareToPlay()
         audioPlayer.play()
+        */
         
         // Do any additional setup after loading the view.
     }

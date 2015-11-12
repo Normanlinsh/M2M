@@ -22,7 +22,9 @@ class LoginViewController: UIViewController {
     
     var activitiyIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
-    //var currentUser : PFUser = PFUser.currentUser()
+    var currentUser : String = ""
+    
+    var passedName : String = ""
     
     @IBAction func login_signUp(sender: AnyObject) {
         
@@ -52,8 +54,23 @@ class LoginViewController: UIViewController {
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
                     if error == nil {
-                        
                         //sign up successful
+                        
+                        let placeholderImage:UIImage = UIImage(named: "SampleProfileImage")!
+                        
+                        let userData = PFObject(className:"userData")
+                        userData["profileImage"] = PFFile(name: "userProfileImage", data: UIImageJPEGRepresentation(placeholderImage, 0.5)!)
+                        userData["friendList"] = []
+                        userData["username"] = self.usernameText.text
+                        userData.saveInBackgroundWithBlock {
+                            (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                self.currentUser = self.usernameText.text!
+                            } else {
+                                print(error)
+                            }
+                        }
+                        
                         //self.currentUser = PFUser.currentUser()!
                         self.performSegueWithIdentifier("loginSegue", sender: self)
                         
@@ -82,8 +99,8 @@ class LoginViewController: UIViewController {
                     UIApplication.sharedApplication().endIgnoringInteractionEvents()
                     
                     if user != nil {
-                        
                         //logged in
+                        
                         //self.currentUser = PFUser.currentUser()!
                         self.performSegueWithIdentifier("loginSegue", sender: self)
                         
@@ -138,7 +155,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if passedName != ""  {
+            currentUser = passedName
+        }
+        if PFUser.currentUser()?.username != nil {
+            currentUser = (PFUser.currentUser()?.username)!
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -147,6 +171,13 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if currentUser != "" && currentUser != "no_UsEr"{
+            performSegueWithIdentifier("loginSegue", sender: self)
+            //print(currentUser)
+            //print(passedName)
+        }
+    }
 
     /*
     // MARK: - Navigation

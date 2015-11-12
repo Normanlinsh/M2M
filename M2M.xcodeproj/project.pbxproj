@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4026EF3C1BF3FFE600EE18AB /* AudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4026EF3B1BF3FFE500EE18AB /* AudioRecorderViewController.swift */; };
+		4026EF3E1BF4014100EE18AB /* sampleRecorder.png in Resources */ = {isa = PBXBuildFile; fileRef = 4026EF3D1BF4014100EE18AB /* sampleRecorder.png */; };
+		4026EF401BF4026C00EE18AB /* sendAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4026EF3F1BF4026C00EE18AB /* sendAudioViewController.swift */; };
+		4026EF421BF425BC00EE18AB /* SampleProfileImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 4026EF411BF425BC00EE18AB /* SampleProfileImage.png */; };
 		405A26E41BF28B4E0018818C /* ViewFriendProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26E31BF28B4E0018818C /* ViewFriendProfileViewController.swift */; };
 		405A26E61BF28B8B0018818C /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26E51BF28B8B0018818C /* SearchFriendViewController.swift */; };
 		405A26E81BF28F130018818C /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26E71BF28F130018818C /* UserProfileViewController.swift */; };
@@ -59,6 +63,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4026EF3B1BF3FFE500EE18AB /* AudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorderViewController.swift; sourceTree = "<group>"; };
+		4026EF3D1BF4014100EE18AB /* sampleRecorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sampleRecorder.png; sourceTree = "<group>"; };
+		4026EF3F1BF4026C00EE18AB /* sendAudioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sendAudioViewController.swift; sourceTree = "<group>"; };
+		4026EF411BF425BC00EE18AB /* SampleProfileImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SampleProfileImage.png; sourceTree = "<group>"; };
 		405A26E31BF28B4E0018818C /* ViewFriendProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFriendProfileViewController.swift; sourceTree = "<group>"; };
 		405A26E51BF28B8B0018818C /* SearchFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
 		405A26E71BF28F130018818C /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -184,9 +192,13 @@
 				405A26EF1BF2A3390018818C /* LoginViewController.swift */,
 				407859A61BF2599B003F122B /* AppDelegate.swift */,
 				407859AA1BF2599B003F122B /* Main.storyboard */,
+				4026EF3F1BF4026C00EE18AB /* sendAudioViewController.swift */,
+				4026EF3B1BF3FFE500EE18AB /* AudioRecorderViewController.swift */,
 				437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */,
 				405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */,
 				405A26EB1BF2947D0018818C /* SampleImage.png */,
+				4026EF3D1BF4014100EE18AB /* sampleRecorder.png */,
+				4026EF411BF425BC00EE18AB /* SampleProfileImage.png */,
 				405A26E71BF28F130018818C /* UserProfileViewController.swift */,
 				405A26F11BF2A3700018818C /* FriendListTableViewController.swift */,
 				405A26E31BF28B4E0018818C /* ViewFriendProfileViewController.swift */,
@@ -322,8 +334,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				407859B41BF2599B003F122B /* LaunchScreen.storyboard in Resources */,
+				4026EF421BF425BC00EE18AB /* SampleProfileImage.png in Resources */,
 				407859B11BF2599B003F122B /* Assets.xcassets in Resources */,
 				407859AC1BF2599B003F122B /* Main.storyboard in Resources */,
+				4026EF3E1BF4014100EE18AB /* sampleRecorder.png in Resources */,
 				405A26EC1BF2947D0018818C /* SampleImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4026EF401BF4026C00EE18AB /* sendAudioViewController.swift in Sources */,
 				405A26F01BF2A3390018818C /* LoginViewController.swift in Sources */,
 				405A26F21BF2A3700018818C /* FriendListTableViewController.swift in Sources */,
 				405A26EE1BF297FA0018818C /* MusicLibraryViewController.swift in Sources */,
@@ -356,6 +371,7 @@
 				405A26E81BF28F130018818C /* UserProfileViewController.swift in Sources */,
 				407859A71BF2599B003F122B /* AppDelegate.swift in Sources */,
 				405A26E41BF28B4E0018818C /* ViewFriendProfileViewController.swift in Sources */,
+				4026EF3C1BF3FFE600EE18AB /* AudioRecorderViewController.swift in Sources */,
 				405A26E61BF28B8B0018818C /* SearchFriendViewController.swift in Sources */,
 				407859AF1BF2599B003F122B /* M2M.xcdatamodeld in Sources */,
 			);

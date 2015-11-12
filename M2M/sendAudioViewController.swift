@@ -1,27 +1,22 @@
 //
-//  ViewFriendProfileViewController.swift
+//  sendAudioViewController.swift
 //  M2M
 //
-//  Created by Sheng-Hua.Lin on 11/10/15.
+//  Created by Sheng-Hua.Lin on 11/11/15.
 //  Copyright © 2015 Lin. All rights reserved.
 //
 
 import UIKit
+import Parse
 
-class ViewFriendProfileViewController: UIViewController {
-
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var userProfileImage: UIImageView!
+class sendAudioViewController: UIViewController {
     
-    var passedName = ""
-    var isFollowing = false
+    var audioFile = "String" //placeholder
+    var receiver = "" //placeholder
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if passedName != "" {
-            username.text = self.passedName
-        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -30,9 +25,14 @@ class ViewFriendProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var sendFriendRequest: UIButton!
-    @IBAction func sendFriendRequest(sender: AnyObject) {
+    func sendFile() {
         
+        let audioToSend = PFObject(className: "sentAudioFiles")
+        
+        // audioToSend["audio"] = PFFile(name: "audio.mp3", contentsAtPath: audioFile)
+        audioToSend["senderUsername"] = PFUser.currentUser()?.username
+        audioToSend["receiverUsername"] = receiver
+
     }
 
     /*

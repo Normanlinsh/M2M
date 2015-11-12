@@ -19,6 +19,8 @@ class SearchFriendViewController: UIViewController {
     var data : [String] = []
     var filtered : [String] = []
     
+    var selectedUser = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -99,20 +101,22 @@ class SearchFriendViewController: UIViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //prepareForSegue(UIStoryboardSegue(), sender: self, name: "test")
-        performSegueWithIdentifier("friendSearchSegue", sender: self)
+        selectedUser = indexPath.row
+        performSegueWithIdentifier("viewFriendProfileSearchSegue", sender: self)
         
     }
     
-    /*
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "viewUserSegue"){
+        
+        if (segue.identifier == "viewFriendProfileSearchSegue"){
             
             let svc = segue.destinationViewController as! ViewFriendProfileViewController;
-            svc.passedName = "test";
+            svc.passedName = filtered[selectedUser];
+            svc.isFollowing = false
         }
     }
-    */
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

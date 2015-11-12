@@ -1,27 +1,18 @@
 //
-//  ViewFriendProfileViewController.swift
+//  AudioRecorderViewController.swift
 //  M2M
 //
-//  Created by Sheng-Hua.Lin on 11/10/15.
+//  Created by Sheng-Hua.Lin on 11/11/15.
 //  Copyright © 2015 Lin. All rights reserved.
 //
 
 import UIKit
 
-class ViewFriendProfileViewController: UIViewController {
+class AudioRecorderViewController: UIViewController {
 
-    @IBOutlet weak var username: UILabel!
-    @IBOutlet weak var userProfileImage: UIImageView!
-    
-    var passedName = ""
-    var isFollowing = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if passedName != "" {
-            username.text = self.passedName
-        }
         // Do any additional setup after loading the view.
     }
 
@@ -30,10 +21,6 @@ class ViewFriendProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var sendFriendRequest: UIButton!
-    @IBAction func sendFriendRequest(sender: AnyObject) {
-        
-    }
 
     /*
     // MARK: - Navigation

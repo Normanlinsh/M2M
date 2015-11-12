@@ -11,8 +11,10 @@ import Parse
 
 class FriendListTableViewController: UITableViewController {
     
-    var usernames = [""]
-    var userIds = [""]
+    var usernames : [String] = [""]
+    var userIds : [String] = [""]
+    
+    var selectedUser = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +81,25 @@ class FriendListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.selectedUser = usernames[indexPath.row]
         performSegueWithIdentifier("viewFriendProfileSegue", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "viewFriendProfileSegue"){
+            
+            let svc = segue.destinationViewController as! ViewFriendProfileViewController;
+            svc.passedName = self.selectedUser;
+            svc.isFollowing = true
+        }
+        
+        if (segue.identifier == "viewFriendProfileSeaerchSegue"){
+            
+            let svc = segue.destinationViewController as! ViewFriendProfileViewController;
+            svc.passedName = self.selectedUser;
+            svc.isFollowing = false     //will cause friends that are searched to be false, need to fix!!
+        }
+        
     }
     
 
