@@ -18,6 +18,7 @@
 		405A26EE1BF297FA0018818C /* MusicLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */; };
 		405A26F01BF2A3390018818C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26EF1BF2A3390018818C /* LoginViewController.swift */; };
 		405A26F21BF2A3700018818C /* FriendListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405A26F11BF2A3700018818C /* FriendListTableViewController.swift */; };
+		406331C41BFBB34200FF5B3D /* RecorderIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 406331C31BFBB34200FF5B3D /* RecorderIcon.png */; };
 		407859A71BF2599B003F122B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407859A61BF2599B003F122B /* AppDelegate.swift */; };
 		407859AC1BF2599B003F122B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 407859AA1BF2599B003F122B /* Main.storyboard */; };
 		407859AF1BF2599B003F122B /* M2M.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 407859AD1BF2599B003F122B /* M2M.xcdatamodeld */; };
@@ -74,6 +75,7 @@
 		405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicLibraryViewController.swift; sourceTree = "<group>"; };
 		405A26EF1BF2A3390018818C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		405A26F11BF2A3700018818C /* FriendListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewController.swift; sourceTree = "<group>"; };
+		406331C31BFBB34200FF5B3D /* RecorderIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecorderIcon.png; sourceTree = "<group>"; };
 		407859A31BF2599B003F122B /* M2M.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M2M.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407859A61BF2599B003F122B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		407859AB1BF2599B003F122B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */,
 				405A26EB1BF2947D0018818C /* SampleImage.png */,
 				4026EF3D1BF4014100EE18AB /* sampleRecorder.png */,
+				406331C31BFBB34200FF5B3D /* RecorderIcon.png */,
 				4026EF411BF425BC00EE18AB /* SampleProfileImage.png */,
 				405A26E71BF28F130018818C /* UserProfileViewController.swift */,
 				405A26F11BF2A3700018818C /* FriendListTableViewController.swift */,
@@ -339,6 +342,7 @@
 				407859AC1BF2599B003F122B /* Main.storyboard in Resources */,
 				4026EF3E1BF4014100EE18AB /* sampleRecorder.png in Resources */,
 				405A26EC1BF2947D0018818C /* SampleImage.png in Resources */,
+				406331C41BFBB34200FF5B3D /* RecorderIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

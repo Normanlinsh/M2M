@@ -11,6 +11,7 @@ import AVFoundation
 
 class AudioRecorderViewController: UIViewController {
     
+    
     var recorder: AVAudioRecorder!
     var player:AVAudioPlayer!
     var meterTimer:NSTimer!
@@ -24,8 +25,8 @@ class AudioRecorderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Stop.enabled = false
-        Play.enabled = false
+        //Stop.enabled = false
+        //Play.enabled = false
         /*setSessionPlayback()
         askForNotifications()
         checkHeadphones()*/ //methods used in example
