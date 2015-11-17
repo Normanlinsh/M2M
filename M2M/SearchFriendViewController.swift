@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import ParseUI
 
 class SearchFriendViewController: UIViewController {
 
@@ -100,11 +101,10 @@ class SearchFriendViewController: UIViewController {
         
         let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
         
-        
-        // the following code attempts to fecth proflileImage from each user and display them next to the cell
+        //the following query attempts to fetch the profileImage from each cell's user and place it next to the cell
         /*
         let query = PFQuery(className: "userData")
-        query.whereKey("username", equalTo: usernames[indexPath.row])
+        query.whereKey("username", equalTo: self.filtered[indexPath.row])
         
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
@@ -113,6 +113,8 @@ class SearchFriendViewController: UIViewController {
                 image.loadInBackground({ (photo, error) -> Void in
                     if error == nil {
                         cellImage = photo!
+                        cell.imageView?.image = cellImage
+                        self.doSomethingAtClosure()
                     } else {
                         print(error)
                     }
@@ -124,9 +126,13 @@ class SearchFriendViewController: UIViewController {
         */
         
         cell.imageView?.image = cellImage
-
         
         return cell
+    }
+    
+    func doSomethingAtClosure() {
+        self.tableView.reloadData()
+        
     }
     
     // function to perform segue when a cell is selected

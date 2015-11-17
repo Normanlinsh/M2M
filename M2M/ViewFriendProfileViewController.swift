@@ -53,7 +53,6 @@ class ViewFriendProfileViewController: UIViewController {
         query2.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
 
             if let friends = object!["friendList"] as? NSArray {
-                print(friends)
                 for friend in friends {
                     if friend as? String == self.username.text {
                         self.isFollowing = true

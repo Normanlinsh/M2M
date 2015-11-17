@@ -12,16 +12,21 @@ import ParseUI
 
 class FriendListTableViewController: UITableViewController {
     
-    var usernames : [String] = []
-    var userIds : [String] = []
+    //var usernames : [String] = []
+    //var userIds : [String] = []
     var friendsList : [String] = []
+    var friendsImage : [UIImage] = []
     
     //var refresh_Control:UIRefreshControl!
     
     var selectedUser = ""
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        //tableView.reloadData()
+        print("here again")
         
         //pull to refresh
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -96,12 +101,9 @@ class FriendListTableViewController: UITableViewController {
         //place holder image
         let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
         
-        
         //the following query attempts to fetch the profileImage from each cell's user and place it next to the cell
-        //***works partially, needs to be debugged***
-        /*
-        let query = PFQuery(className: "userData")
-        query.whereKey("username", equalTo: usernames[indexPath.row])
+        /*let query = PFQuery(className: "userData")
+        query.whereKey("username", equalTo: self.friendsList[indexPath.row])
         
         query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
             if error == nil {
@@ -110,6 +112,8 @@ class FriendListTableViewController: UITableViewController {
                 image.loadInBackground({ (photo, error) -> Void in
                     if error == nil {
                         cellImage = photo!
+                        cell.imageView?.image = cellImage
+                        self.doSomethingAtClosure()
                     } else {
                         print(error)
                     }
@@ -117,14 +121,16 @@ class FriendListTableViewController: UITableViewController {
             } else {
                 print(error)
             }
-        }
-        */
-
+        }*/
         
-        //place holder image
         cell.imageView?.image = cellImage
-
+        
         return cell
+    }
+    
+    func doSomethingAtClosure() {
+        self.tableView.reloadData()
+    
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
