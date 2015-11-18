@@ -173,7 +173,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Editor" id="Y99-eW-zDI">
-                        <barButtonItem key="rightBarButtonItem" title="Send" id="1a9-qA-VF0">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="1a9-qA-VF0">
                             <connections>
                                 <segue destination="oyp-6X-Kud" kind="show" id="sQo-js-a3L"/>
                             </connections>
@@ -219,7 +219,9 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Send to friend(s)" id="Dga-9o-HRo"/>
+                    <navigationItem key="navigationItem" title="Send to friend(s)" id="Dga-9o-HRo">
+                        <barButtonItem key="rightBarButtonItem" title="Send" id="Wdg-zM-spH"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uDY-8Z-SG7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -292,7 +294,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bh-48-XZm">
                                 <rect key="frame" x="251" y="564" width="53" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Disgard"/>
+                                <state key="normal" title="Discard"/>
                             </button>
                         </subviews>
                         <animations/>
@@ -398,7 +400,7 @@
                         <outlet property="userId" destination="cSj-pl-hb6" id="t1W-9z-zGR"/>
                         <outlet property="userProfileImage" destination="4Ay-bJ-ud3" id="pNR-h1-W4G"/>
                         <outlet property="username" destination="pHn-X4-sRh" id="9jm-bx-D5a"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="logOutSegue" id="Tkx-Vj-3Mz"/>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="logOutSegue" id="Tkx-Vj-3Mz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gx2-es-tve" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -481,7 +483,7 @@
             </objects>
             <point key="canvasLocation" x="1427.5" y="1158.5"/>
         </scene>
-        <!--Search Friend View Controller-->
+        <!--Search for friends-->
         <scene sceneID="NIi-9o-ynH">
             <objects>
                 <viewController id="lbb-8V-lCE" customClass="SearchFriendViewController" customModule="M2M" customModuleProvider="target" sceneMemberID="viewController">
@@ -536,6 +538,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Search for friends" id="zSJ-pA-Wkb"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="searchBar" destination="KZC-QM-5IA" id="bFx-1Y-pvF"/>
@@ -547,7 +550,7 @@
             </objects>
             <point key="canvasLocation" x="893.5" y="1963.5"/>
         </scene>
-        <!--View Friend Profile View Controller-->
+        <!--Friend's Profile-->
         <scene sceneID="L3z-0E-pQZ">
             <objects>
                 <viewController id="oNr-gr-llE" customClass="ViewFriendProfileViewController" customModule="M2M" customModuleProvider="target" sceneMemberID="viewController">
@@ -605,6 +608,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Friend's Profile" id="u8I-Uf-nKa"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -684,6 +688,6 @@
         <image name="sampleRecorder.png" width="700" height="700"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MVt-AA-BEh"/>
+        <segue reference="Z1K-ui-mst"/>
     </inferredMetricsTieBreakers>
 </document>
