@@ -26,7 +26,6 @@ class FriendListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         //tableView.reloadData()
-        print("here again")
         
         //pull to refresh
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)

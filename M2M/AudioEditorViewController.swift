@@ -44,4 +44,11 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "editorToLibrarySegue"){
+            
+            let svc = segue.destinationViewController as! MusicLibraryViewController;
+            svc.fromEditor = true
+        }
+    }
 }

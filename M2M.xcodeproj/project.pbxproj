@@ -43,6 +43,7 @@
 		407859F61BF25B86003F122B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859F51BF25B86003F122B /* SystemConfiguration.framework */; };
 		407859F81BF25B9F003F122B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859F71BF25B9E003F122B /* libz.tbd */; };
 		407859FA1BF25BAC003F122B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 407859F91BF25BAC003F122B /* libsqlite3.tbd */; };
+		40ADD5EA1BFD88460031E177 /* sendToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */; };
 		437C2F321BF36BFB0018F362 /* AudioEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		407859F51BF25B86003F122B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		407859F71BF25B9E003F122B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		407859F91BF25BAC003F122B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sendToFriendsViewController.swift; sourceTree = "<group>"; };
 		437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 				407859AA1BF2599B003F122B /* Main.storyboard */,
 				4026EF3F1BF4026C00EE18AB /* sendAudioViewController.swift */,
 				4026EF3B1BF3FFE500EE18AB /* AudioRecorderViewController.swift */,
+				40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */,
 				437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */,
 				405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */,
 				405A26EB1BF2947D0018818C /* SampleImage.png */,
@@ -376,6 +379,7 @@
 				407859A71BF2599B003F122B /* AppDelegate.swift in Sources */,
 				405A26E41BF28B4E0018818C /* ViewFriendProfileViewController.swift in Sources */,
 				4026EF3C1BF3FFE600EE18AB /* AudioRecorderViewController.swift in Sources */,
+				40ADD5EA1BFD88460031E177 /* sendToFriendsViewController.swift in Sources */,
 				405A26E61BF28B8B0018818C /* SearchFriendViewController.swift in Sources */,
 				407859AF1BF2599B003F122B /* M2M.xcdatamodeld in Sources */,
 			);
