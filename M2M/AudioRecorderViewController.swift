@@ -9,42 +9,49 @@
 import UIKit
 import AVFoundation
 
-class AudioRecorderViewController: UIViewController {
-    
+class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     var recorder: AVAudioRecorder!
+    
     var player:AVAudioPlayer!
+    
     var meterTimer:NSTimer!
+    
     var soundFileURL:NSURL!
     
+    
     @IBOutlet var Record: UIButton!
-    @IBOutlet var Stop: UIButton!
+    
     @IBOutlet var Play: UIButton!
+    
+    @IBOutlet var Stop: UIButton!
+    
     @IBOutlet var Status: UILabel!
-
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
-        //Stop.enabled = false
-        //Play.enabled = false
-        /*setSessionPlayback()
-        askForNotifications()
-        checkHeadphones()*/ //methods used in example
+        Stop.enabled = false
+        Play.enabled = false
+        //setSessionPlayback()
+        //askForNotifications()
+        //checkHeadphones()
         
-        func updateAudioMeter(timer:NSTimer) {
-            
-            if recorder.recording {
-                let min = Int(recorder.currentTime / 60)
-                let sec = Int(recorder.currentTime % 60)
-                let s = String(format: "%02d:%02d", min, sec)
-                Status.text = s
-                recorder.updateMeters()
-            }
-        }
-
-        // Do any additional setup after loading the view.
+        
     }
-
+    
+    func updateAudioMeter(timer:NSTimer) {
+        
+        if recorder.recording {
+            let min = Int(recorder.currentTime / 60)
+            let sec = Int(recorder.currentTime % 60)
+            let s = String(format: "%02d:%02d", min, sec)
+            Status.text = s
+            recorder.updateMeters()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -52,25 +59,187 @@ class AudioRecorderViewController: UIViewController {
         player = nil
     }
     
+    
     @IBAction func record(sender: UIButton) {
         
-    }
-    @IBAction func play(sender: UIButton){
+        if player != nil && player.playing {
+            player.stop()
+        }
         
-    }
-    @IBAction func stop(sender: UIButton) {
+        if recorder == nil {
+            print("recording. recorder nil")
+            Record.setTitle("Pause", forState: .Normal)
+            Play.enabled = false
+            Stop.enabled = true
+            recordWithPermission(true)
+            return
+        }
+        
+        if recorder != nil && recorder.recording {
+            print("pausing")
+            recorder.pause()
+            Record.setTitle("Continue", forState: .Normal)
+        } else {
+            print("recording")
+            Record.setTitle("Pause", forState: .Normal)
+            Play.enabled = false
+            Stop.enabled = true
+            recordWithPermission(false)
+        }
         
     }
     
-
+    @IBAction func play(sender: UIButton) {
+        play()
+        
+    }
+    
+    
+    @IBAction func stop(sender: UIButton) {
+        print("stop")
+        
+        recorder?.stop()
+        player?.stop()
+        
+        meterTimer.invalidate()
+        
+        Record.setTitle("Record", forState: .Normal)
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setActive(false)
+            Play.enabled = true
+            Stop.enabled = false
+            Record.enabled = true
+        } catch let error as NSError {
+            print("could not be active")
+            print(error.localizedDescription)
+        }
+    }
+    
+    func play() {
+        var url:NSURL?
+        if self.recorder != nil {
+            url = self.recorder.url
+        } else {
+            url = self.soundFileURL!
+        }
+        print("playing \(url)")
+        
+        do {
+            self.player = try AVAudioPlayer(contentsOfURL: url!)
+            Stop.enabled = true
+            player.delegate = self
+            player.prepareToPlay()
+            player.volume = 1.0
+            player.play()
+        } catch let error as NSError {
+            self.player = nil
+            print(error.localizedDescription)
+        }
+    }
+    
+    func setupRecorder() {
+        let format = NSDateFormatter()
+        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+        let currentFileName = "recording-\(format.stringFromDate(NSDate())).m4a"
+        print(currentFileName)
+        
+        let documentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        self.soundFileURL = documentsDirectory.URLByAppendingPathComponent(currentFileName)
+        
+        if NSFileManager.defaultManager().fileExistsAtPath(soundFileURL.absoluteString) {
+            print("soundfile \(soundFileURL.absoluteString) exists")
+        }
+        
+        let recordSettings:[String : AnyObject] = [
+            AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatAppleLossless),
+            AVEncoderAudioQualityKey : AVAudioQuality.Max.rawValue,
+            AVEncoderBitRateKey : 320000,
+            AVNumberOfChannelsKey: 2,
+            AVSampleRateKey : 44100.0
+        ]
+        
+        do {
+            recorder = try AVAudioRecorder(URL: soundFileURL, settings: recordSettings)
+            recorder.delegate = self
+            recorder.meteringEnabled = true
+            recorder.prepareToRecord() // creates/overwrites the file at soundFileURL
+        } catch let error as NSError {
+            recorder = nil
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    func recordWithPermission(setup:Bool) {
+        let session:AVAudioSession = AVAudioSession.sharedInstance()
+        if (session.respondsToSelector("requestRecordPermission:")) {
+            AVAudioSession.sharedInstance().requestRecordPermission({(granted: Bool)-> Void in
+                if granted {
+                    print("Permission to record granted")
+                    self.setSessionPlayAndRecord()
+                    if setup {
+                        self.setupRecorder()
+                    }
+                    self.recorder.record()
+                    self.meterTimer = NSTimer.scheduledTimerWithTimeInterval(0.1,
+                        target:self,
+                        selector:"updateAudioMeter:",
+                        userInfo:nil,
+                        repeats:true)
+                } else {
+                    print("Permission to record not granted")
+                }
+            })
+        } else {
+            print("requestRecordPermission unrecognized")
+        }
+    }
+    
+    func setSessionPlayAndRecord() {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        } catch let error as NSError {
+            print("could not set session category")
+            print(error.localizedDescription)
+        }
+        do {
+            try session.setActive(true)
+        } catch let error as NSError {
+            print("could not make session active")
+            print(error.localizedDescription)
+        }
+    }
+    
+    func askForNotifications() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector:"background:",
+            name:UIApplicationWillResignActiveNotification,
+            object:nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector:"foreground:",
+            name:UIApplicationWillEnterForegroundNotification,
+            object:nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector:"routeChange:",
+            name:AVAudioSessionRouteChangeNotification,
+            object:nil)
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
