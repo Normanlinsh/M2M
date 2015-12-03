@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import Parse
+import ParseUI
 
 class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
@@ -19,6 +21,7 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     
     var soundFileURL:NSURL!
     
+    var activitiyIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     @IBOutlet var Record: UIButton!
     
@@ -34,10 +37,14 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
         
         Stop.enabled = false
         Play.enabled = false
+        
+        if soundFileURL != nil {
+            Record.enabled = false
+        }
+        
         //setSessionPlayback()
         //askForNotifications()
         //checkHeadphones()
-        
         
     }
     
@@ -94,7 +101,6 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
         
     }
     
-    
     @IBAction func stop(sender: UIButton) {
         print("stop")
         
@@ -102,6 +108,58 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
         player?.stop()
         
         meterTimer.invalidate()
+        
+        //************* saving the recording *******************
+        
+        if !Play.enabled {
+            
+            let format = NSDateFormatter()
+            format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+            var recordingName = "recording-\(format.stringFromDate(NSDate())).m4a"
+            
+            //************** alert to name the recording *******************
+            let alert = UIAlertController(title: "Rename",
+                message: "Name Recording",
+                preferredStyle: .Alert)
+            
+            alert.addAction(UIAlertAction(title: "Save to your recordings", style: .Default, handler: {[unowned alert] action in
+                //print("yes was tapped")
+                if let textFields = alert.textFields{
+                    let tfa = textFields as [UITextField]
+                    let text = tfa[0].text
+                    recordingName = text!
+                    //print(recordingName)
+                    //print((PFUser.currentUser()?.username)!)
+                }
+                
+                //start activity indicator
+                self.activitiyIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+                self.activitiyIndicator.center = self.view.center
+                self.activitiyIndicator.hidesWhenStopped = true
+                self.activitiyIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+                self.view.addSubview(self.activitiyIndicator)
+                self.activitiyIndicator.startAnimating()
+                UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+                
+                // attempt to save to Parse
+                self.saveToParse(recordingName)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Don't save", style: .Default, handler: {action in
+                print("no was tapped")
+            }))
+            
+            alert.addTextFieldWithConfigurationHandler({textfield in
+                textfield.placeholder = "Enter a filename"
+                textfield.text = recordingName
+            })
+            
+            self.presentViewController(alert, animated:true, completion:nil)
+            //******************************************************
+            
+        }
+        
+        //******************************************************
         
         Record.setTitle("Record", forState: .Normal)
         let session = AVAudioSession.sharedInstance()
@@ -114,6 +172,26 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             print("could not be active")
             print(error.localizedDescription)
         }
+    }
+    
+    func saveToParse(recordingName: String) {
+        let soundFile = PFFile(name: recordingName, data: NSData(contentsOfURL: self.soundFileURL!)!)
+        let testClass = PFObject(className: "\((PFUser.currentUser()?.username)!)_audioFiles") //need to change
+        testClass["audioName"] = recordingName //need to change
+        testClass["audioFile"] = soundFile
+        testClass["ownerUserName"] = (PFUser.currentUser()?.username)!
+        testClass.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if error != nil {
+                print(error)
+                print("didnt save!!")
+            } else {
+                //saved to Parse!
+                print("saved to Parse")
+                //ends activity indicator
+                self.activitiyIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            }
+        })
     }
     
     func play() {
@@ -142,6 +220,7 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
         let format = NSDateFormatter()
         format.dateFormat="yyyy-MM-dd-HH-mm-ss"
         let currentFileName = "recording-\(format.stringFromDate(NSDate())).m4a"
+
         print(currentFileName)
         
         let documentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
@@ -230,8 +309,6 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             object:nil)
     }
     
-    
-    
     /*
     // MARK: - Navigation
     
@@ -242,4 +319,35 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     }
     */
     
+    /*
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder,
+        successfully flag: Bool) {
+            print("finished recording \(flag)")
+            Stop.enabled = false
+            Play.enabled = true
+            Record.setTitle("Record", forState:.Normal)
+            
+            // iOS8 and later
+            let alert = UIAlertController(title: "Recorder",
+                message: "Finished Recording",
+                preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Keep", style: .Default, handler: {action in
+                print("keep was tapped")
+            }))
+            alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: {action in
+                print("delete was tapped")
+                self.recorder.deleteRecording()
+            }))
+            //self.presentViewController(alert, animated:true, completion:nil)
+    }
+    */
+    
+    func audioRecorderEncodeErrorDidOccur(recorder: AVAudioRecorder,
+        error: NSError?) {
+            
+            if let e = error {
+                print("\(e.localizedDescription)")
+            }
+    }
+
 }

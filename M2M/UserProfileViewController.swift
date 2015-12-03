@@ -18,11 +18,11 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var userProfileImage: UIImageView!
     
     //logout button
-    @IBAction func logout(sender: AnyObject) {
+    
+    @IBAction func logOut(sender: AnyObject) {
         PFUser.logOut()
         performSegueWithIdentifier("logOutSegue", sender: self)
     }
-    
     
     
     override func viewDidLoad() {
@@ -50,7 +50,22 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
             }
         }
         
-
+        
+        //*************************************************************
+        /*let testClass = PFObject(className: "a123_audioFiles")
+        testClass["audioName"] = "audio1"
+        //testClass["audioFile"] = soundFile
+        testClass.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if error != nil {
+                print(error)
+                print("didnt save!!")
+            } else {
+                //saved to Parse!
+                print("saved to Parse")
+            }
+        })
+        */
+        
         // Do any additional setup after loading the view.
     }
 

@@ -127,7 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Uncomment this line if you want to enable Crash Reporting
         // ParseCrashReporting.enable()
         //
-        Parse.setApplicationId("gOyTU1HicpnHDH42S9THBRsc6iNcd5mIWTosnIQI", clientKey: "xJmYOaul2wZHI3spoy63cKAImnWDxd8tILDc3BzW")
+        Parse.setApplicationId("IhOuxA0DpHoZRzz8BFA01ReR6UkuH4H09d5BqB07", clientKey: "ijUTpZN6sS0c2xV1L5E3RWsaTITEoDFsGqzlFAXM")
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
         // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
