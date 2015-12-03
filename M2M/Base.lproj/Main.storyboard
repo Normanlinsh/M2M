@@ -180,6 +180,14 @@
                                 <animations/>
                                 <state key="normal" title="Save"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YI4-0e-Wvi">
+                                <rect key="frame" x="172" y="282" width="30" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Test"/>
+                                <connections>
+                                    <action selector="test:" destination="YU8-xd-QMT" eventType="touchUpInside" id="bYW-Vs-bP3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -291,25 +299,23 @@
                                     <action selector="play:" destination="g9b-Kb-WYR" eventType="touchUpInside" id="S1n-Lm-ugL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Psz-qB-WUV">
-                                <rect key="frame" x="148" y="100" width="80" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bh-48-XZm">
+                                <rect key="frame" x="162" y="565" width="53" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Record">
+                                <state key="normal" title="Discard"/>
+                                <connections>
+                                    <action selector="discardAudio:" destination="g9b-Kb-WYR" eventType="touchUpInside" id="OiB-Pk-Xrh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Psz-qB-WUV">
+                                <rect key="frame" x="109" y="178" width="159" height="158"/>
+                                <animations/>
+                                <state key="normal" image="sampleRecorder.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="record:" destination="g9b-Kb-WYR" eventType="touchUpInside" id="Reg-bP-HDl"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHn-37-Tf0">
-                                <rect key="frame" x="117" y="195" width="142" height="145"/>
-                                <animations/>
-                                <state key="normal" title="Button" image="sampleRecorder.png"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bh-48-XZm">
-                                <rect key="frame" x="162" y="565" width="53" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Discard"/>
                             </button>
                         </subviews>
                         <animations/>
@@ -319,7 +325,7 @@
                     <navigationItem key="navigationItem" title="Recorder" id="1os-Oe-gPw">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="apo-md-xvJ">
                             <connections>
-                                <segue destination="YU8-xd-QMT" kind="show" id="IaS-qA-p9S"/>
+                                <segue destination="YU8-xd-QMT" kind="show" identifier="audioEditorSegue" id="IaS-qA-p9S"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

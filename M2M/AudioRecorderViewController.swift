@@ -159,6 +159,10 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             
         }
         
+        if soundFileURL != nil {
+            Record.enabled = false
+        }
+        
         //******************************************************
         
         Record.setTitle("Record", forState: .Normal)
@@ -167,7 +171,7 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             try session.setActive(false)
             Play.enabled = true
             Stop.enabled = false
-            Record.enabled = true
+            //Record.enabled = true
         } catch let error as NSError {
             print("could not be active")
             print(error.localizedDescription)
@@ -184,6 +188,19 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             if error != nil {
                 print(error)
                 print("didnt save!!")
+                
+                //ends activity indicator
+                self.activitiyIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                
+                let alert = UIAlertController(title: "Failed",
+                    message: "Unable to save audio file",
+                    preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: {action in
+                }))
+                
+                self.presentViewController(alert, animated:true, completion:nil)
+                
             } else {
                 //saved to Parse!
                 print("saved to Parse")
@@ -215,6 +232,39 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             print(error.localizedDescription)
         }
     }
+    
+    
+    @IBAction func discardAudio(sender: AnyObject) {
+        
+        let alert = UIAlertController(title: "Discard Recording",
+            message: "Are You Sure?",
+            preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: {action in
+            print("yes was tapped")
+            self.Record.enabled = true
+            self.Play.enabled = false
+            self.Stop.enabled = false
+            self.Status.text = "00:00"
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No", style: .Default, handler: {action in
+            print("no was tapped")
+        }))
+        
+        self.presentViewController(alert, animated:true, completion:nil)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "audioEditorSegue"){
+            if soundFileURL != nil {
+                let svc = segue.destinationViewController as! AudioEditorViewController
+                svc.url = self.soundFileURL!
+            }
+        }
+    }
+    
     
     func setupRecorder() {
         let format = NSDateFormatter()

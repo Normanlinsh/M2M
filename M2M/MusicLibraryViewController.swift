@@ -169,6 +169,9 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         self.refreshControl?.endRefreshing()
     }
 
+    override func viewWillAppear(animated: Bool) {
+        //refresh(self)
+    }
     
     /*
     // MARK: - Navigation

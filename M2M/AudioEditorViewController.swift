@@ -11,9 +11,25 @@ import AVFoundation //Experimenting
 import UIKit
 import Parse
 
-var audioPlayer = AVAudioPlayer()
-
 class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
+    
+    var audioPlayer: AVAudioPlayer!
+    
+    var url:NSURL!
+    
+    @IBAction func test(sender: AnyObject) {
+        do {
+            self.audioPlayer = try AVAudioPlayer(contentsOfURL: url!)
+            audioPlayer.delegate = self
+            audioPlayer.prepareToPlay()
+            audioPlayer.volume = 1.0
+            audioPlayer.play()
+        } catch let error as NSError {
+            self.audioPlayer = nil
+            print(error.localizedDescription)
+        }
+    }
+    
     
     func playSound() -> SystemSoundID {
         var soundID: SystemSoundID = 0
