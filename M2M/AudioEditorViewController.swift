@@ -13,31 +13,17 @@ import Parse
 
 class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
-    var audioPlayer: AVAudioPlayer!
+    var player: AVAudioPlayer!
     
     var url:NSURL!
     
-    @IBAction func test(sender: AnyObject) {
-        do {
-            self.audioPlayer = try AVAudioPlayer(contentsOfURL: url!)
-            audioPlayer.delegate = self
-            audioPlayer.prepareToPlay()
-            audioPlayer.volume = 1.0
-            audioPlayer.play()
-        } catch let error as NSError {
-            self.audioPlayer = nil
-            print(error.localizedDescription)
-        }
-    }
+    /*@IBOutlet var Play: UIButton!
     
+    @IBOutlet var Stop: UIButton!
     
-    func playSound() -> SystemSoundID {
-        var soundID: SystemSoundID = 0
-        /*let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "", "", nil)
-        AudioServicesCreateSystemSoundID(soundURL, &soundID)
-        CFRelease(?)*/
-        return soundID
-    }
+    @IBOutlet var Edit: UIButton!
+    
+    @IBOutlet var Delete: UIButton!*/
     
 
     override func viewDidLoad() {
@@ -53,6 +39,28 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         */
         
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func test(sender: AnyObject) {
+        do {
+            self.player = try AVAudioPlayer(contentsOfURL: url!)
+            player.delegate = self
+            player.prepareToPlay()
+            player.volume = 1.0
+            player.play()
+        } catch let error as NSError {
+            self.player = nil
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    func playSound() -> SystemSoundID {
+        let soundID: SystemSoundID = 0
+        /*let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "", "", nil)
+        AudioServicesCreateSystemSoundID(soundURL, &soundID)
+        CFRelease(?)*/
+        return soundID
     }
     
     override func didReceiveMemoryWarning() {
