@@ -11,7 +11,7 @@ import AVFoundation //Experimenting
 import UIKit
 import Parse
 
-class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
+class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate {
     
     var player: AVAudioPlayer!
     
@@ -41,7 +41,26 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func test(sender: AnyObject) {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        return cell as UITableViewCell
+    }
+    
+
+    
+    /*@IBAction func test(sender: AnyObject) {
         do {
             self.player = try AVAudioPlayer(contentsOfURL: url!)
             player.delegate = self
@@ -57,11 +76,11 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
     func playSound() -> SystemSoundID {
         let soundID: SystemSoundID = 0
-        /*let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "", "", nil)
+        let soundURL = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "", "", nil)
         AudioServicesCreateSystemSoundID(soundURL, &soundID)
-        CFRelease(?)*/
+        CFRelease(?)
         return soundID
-    }
+    }*/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

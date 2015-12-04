@@ -18,6 +18,8 @@ class AudioFileTableViewCell: UITableViewCell {
     
     @IBOutlet var Play: UIButton!
     
+    //var AudioFile
+    
     
     //@IBOutlet var Stop: UIButton!
     
@@ -32,7 +34,7 @@ class AudioFileTableViewCell: UITableViewCell {
     @IBAction func Append(sender: UIButton) {
     }
     
-    @IBAction func Delete(sender: UIbUtton) {
+    @IBAction func Delete(sender: UIButton) {
         
     }
     
