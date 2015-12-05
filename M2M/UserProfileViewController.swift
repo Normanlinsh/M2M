@@ -41,6 +41,11 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
                 image.loadInBackground({ (photo, error) -> Void in
                     if error == nil {
                         self.userProfileImage.image = photo!
+                        self.userProfileImage.layer.borderWidth = 1
+                        self.userProfileImage.layer.masksToBounds = false
+                        self.userProfileImage.layer.borderColor = UIColor.blackColor().CGColor
+                        self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.height/2
+                        self.userProfileImage.clipsToBounds = true
                     } else {
                         print(error)
                     }
@@ -49,22 +54,6 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
                 print(error)
             }
         }
-        
-        
-        //*************************************************************
-        /*let testClass = PFObject(className: "a123_audioFiles")
-        testClass["audioName"] = "audio1"
-        //testClass["audioFile"] = soundFile
-        testClass.saveInBackgroundWithBlock({ (success, error) -> Void in
-            if error != nil {
-                print(error)
-                print("didnt save!!")
-            } else {
-                //saved to Parse!
-                print("saved to Parse")
-            }
-        })
-        */
         
         // Do any additional setup after loading the view.
     }
