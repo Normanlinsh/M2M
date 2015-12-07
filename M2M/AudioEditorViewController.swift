@@ -25,6 +25,25 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate, UITabl
     
     @IBOutlet var Delete: UIButton!*/
     
+    //Let the user to go back to the library
+    @IBOutlet var LibraryBtn: UIButton!
+    
+    //Let the user to edit the music and allow a pop-up window to choose between overlaying and appending
+    @IBAction func EditBtn(sender: UIButton) {
+        
+    }
+    
+    //Play the recorded file
+    @IBAction func PlayBtn_one(sender: UIButton) {
+    }
+    
+    //Play the track from friend
+    @IBAction func PlayBtn_two(sender: UIButton) {
+    }
+    
+    //Allow the user to discard the current file and pick another one from the library
+    @IBAction func DiscardBtn(sender: UIButton) {
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
