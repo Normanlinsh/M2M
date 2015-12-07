@@ -138,7 +138,7 @@
                     <navigationItem key="navigationItem" title="Music Library" id="qhx-mG-3zq">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="srG-5B-m5P">
                             <connections>
-                                <action selector="addFile:" destination="aIm-K5-oHX" id="3vH-e7-vVC"/>
+                                <action selector="importAudio:" destination="aIm-K5-oHX" id="18T-be-LY2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -169,7 +169,7 @@
                                 <animations/>
                                 <state key="normal" title="Library"/>
                                 <connections>
-                                    <segue destination="aIm-K5-oHX" kind="show" identifier="editorToLibrarySegue" id="7Pc-UI-Onb"/>
+                                    <segue destination="aIm-K5-oHX" kind="show" identifier="editorToLibrarySegue" action="showDetailViewController:sender:" id="EiP-S8-UQo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m66-Ev-GKF">
@@ -765,7 +765,7 @@
         <image name="sampleRecorder.png" width="700" height="700"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="EiP-S8-UQo"/>
         <segue reference="MVt-AA-BEh"/>
-        <segue reference="7Pc-UI-Onb"/>
     </inferredMetricsTieBreakers>
 </document>

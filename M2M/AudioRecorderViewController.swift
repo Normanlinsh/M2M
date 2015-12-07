@@ -184,6 +184,7 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
         testClass["audioName"] = recordingName //need to change
         testClass["audioFile"] = soundFile
         testClass["ownerUserName"] = (PFUser.currentUser()?.username)!
+        testClass["author"] = "You"
         testClass.saveInBackgroundWithBlock({ (success, error) -> Void in
             if error != nil {
                 print(error)

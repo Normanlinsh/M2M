@@ -42,9 +42,14 @@ class FriendListTableViewController: UITableViewController {
             } else {
                 print(error)
             }
-            self.populateImageData()
+            self.friendsList.sortInPlace { (element1, element2) -> Bool in
+                return element1 < element2
+            }
             self.tableView.reloadData()
         })
+        
+        
+        populateImageData()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -57,24 +62,34 @@ class FriendListTableViewController: UITableViewController {
         let query = PFQuery(className: "userData")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
-                for object in objects! {
-                    var i = 0
-                    if (object["username"] as! String) == self.friendsList[i] {
-                        let image = PFImageView()
-                        image.file = object["profileImage"] as? PFFile
-                        image.loadInBackground({ (photo, error) -> Void in
-                            if error == nil {
-                                self.friendsImage[i] = photo
-                                i++
-                            } else {
-                                print(error)
-                            }
-                        })
+                for var i = 0; i<self.friendsList.count; i++ {
+                    //print(self.friendsList[i])
+                    for object in objects! {
+                        if (object["username"] as! String) == self.friendsList[i] {
+                            print(object["username"])
+                            
+                            let image = PFImageView()
+                            image.file = object["profileImage"] as? PFFile
+                            image.loadInBackground({ (photo, error) -> Void in
+                                if error == nil {
+                                    self.friendsImage[i] = photo
+                                    i++
+                                    //print("saved")
+                                } else {
+                                    print(error)
+                                }
+                                self.tableView.reloadData()
+                                print(self.friendsImage)
+                            })
+                            
+                        }
                     }
                 }
             } else {
                 print(error)
             }
+            print("hereeee")
+        self.tableView.reloadData()
         }
     }
 
@@ -106,12 +121,12 @@ class FriendListTableViewController: UITableViewController {
         
         if friendsImage[indexPath.row] != nil {
             cell.imageView?.image = friendsImage[indexPath.row]
+            print("here!!!")
         } else {
             cell.imageView?.image = cellImage
         }
         
-        cell.imageView?.image = cellImage
-        
+        //print("here")
         return cell
     }
     

@@ -15,10 +15,15 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     
     var player:AVAudioPlayer!
     var refreshControl:UIRefreshControl!
+    var selectedFileIndexRow : Int = -1
+    var selectedFileIndexPath : NSIndexPath!
+    var previouslySelectedFileIndexPath : NSIndexPath!
+    var currentCategory = 0
 
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFileButton: UIBarButtonItem!
+
     
     var data : [String] = []
     var data0 : [String] = []
@@ -98,8 +103,23 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
-        //print(indexPath.row)
+        
+        if fromEditor {
+            let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            if previouslySelectedFileIndexPath == nil {
+                previouslySelectedFileIndexPath = indexPath
+            } else {
+                previouslySelectedFileIndexPath = selectedFileIndexPath
+                let previouslySelectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(previouslySelectedFileIndexPath)!
+                previouslySelectedCell.accessoryType = UITableViewCellAccessoryType.None
+            }
+            selectedFileIndexPath = indexPath
+            selectedFileIndexRow = indexPath.row
+            selectedCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            //importAudio(self)
+        }
+
+        //play audio at selected cell
         play(indexPath.row)
     }
     
@@ -126,16 +146,35 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
                 print(error.localizedDescription)
             }
         }
-        
     }
+    
+    @IBAction func importAudio(sender: AnyObject) {
+        //navigationController?.popViewControllerAnimated(true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "libraryToEditorSegue"){
+            
+            let svc = segue.destinationViewController as! AudioEditorViewController;
+            svc.fromLibrary = true
+            if currentCategory == 0 {
+                svc.fromLibraryFileName = data0[selectedFileIndexRow]
+            } else {
+                svc.fromLibraryFileName = data1[selectedFileIndexRow]
+            }
+        }
+    }
+    
     
     func valueChanged(segmentedControl: UISegmentedControl) {
         //print("Coming in : \(segmentedControl.selectedSegmentIndex)")
         
         if(segmentedControl.selectedSegmentIndex == 0){
             self.data = self.data0
+            currentCategory = 0
         } else {
             self.data = data1
+            currentCategory = 1
         }
         tableView.reloadData()
     }

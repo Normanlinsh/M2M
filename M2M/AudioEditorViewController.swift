@@ -13,7 +13,10 @@ import Parse
 
 class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    var player: AVAudioPlayer!
+    var player : AVAudioPlayer!
+    var secondAudioFileData : NSData!
+    var fromLibrary = false
+    var fromLibraryFileName = ""
     
     var url:NSURL!
     
@@ -92,6 +95,35 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate, UITabl
             
             let svc = segue.destinationViewController as! MusicLibraryViewController;
             svc.fromEditor = true
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if fromLibrary {
+            retrieveFromParse(fromLibraryFileName)
+        }
+    }
+    
+    // retrieve the audio file from parse by the audio name passed from library
+    func retrieveFromParse(fileName: String) {
+        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        query.whereKey("audioName", equalTo: fileName)
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            /*if error == nil {
+                // :Mark, secondAudioFile is the audio file selected from Library. it is NSData, which can be easily played by AVAudioPlayer with play with data method
+                object!["audioFile"].getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.secondAudioFileData = data
+                    } else {
+                        print(error)
+                    }
+                })
+            } else {
+                print(error)
+            }
+            */
+            print(object!["audioName"])
+
         }
     }
 }
