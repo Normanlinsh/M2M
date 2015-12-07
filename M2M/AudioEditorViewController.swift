@@ -92,7 +92,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate, UITabl
     }
     
     func append(audio1: NSURL, audio2:  NSURL) {
-        
+        /*
         let composition = AVMutableComposition()
         var track1:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio,
             preferredTrackID: CMPersistentTrackID())
@@ -133,19 +133,19 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate, UITabl
         var assetExport = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A)
         assetExport!.outputFileType = AVFileTypeAppleM4A
         assetExport!.outputURL = fileDestinationUrl
-        assetExport.exportAsynchronouslyWithCompletionHandler({
-            switch assetExport.status{
+        assetExport!.exportAsynchronouslyWithCompletionHandler({
+            switch assetExport!.status{
             case  AVAssetExportSessionStatus.Failed:
-                println("Failed \(assetExport.error)")
+                print("Failed \(assetExport!.error)")
             case AVAssetExportSessionStatus.Cancelled:
-                println("Cancelled \(assetExport.error)")
+                print("Cancelled \(assetExport!.error)")
             default:
-                println("Success")
+               print("Success")
             //Add new file to library, unfinished
             }
             
         })
-
+        */
     }
     
     func overlay(audio1: NSURL, audio2:  NSURL) {
