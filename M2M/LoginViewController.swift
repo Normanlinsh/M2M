@@ -152,7 +152,7 @@ class LoginViewController: UIViewController {
             
             login_signUp_button.setTitle("Login", forState: UIControlState.Normal)
             //switchMode_button.setTitle("Sign Up", forState: UIControlState.Normal)
-            //signUpDescription2.text = "Not Registered?"
+            signUpDescription2.text = "Don't have an account?"
             //signUpDescription.text = "Login Below!"
             signUpActive = false
             
@@ -160,7 +160,7 @@ class LoginViewController: UIViewController {
             
             login_signUp_button.setTitle("Sign Up", forState: UIControlState.Normal)
             //switchMode_button.setTitle("Login", forState: UIControlState.Normal)
-            //signUpDescription2.text = "Already Registered?"
+            signUpDescription2.text = "Already have an account?"
             //signUpDescription.text = "Sign Up Below!"
             signUpActive = true
             

@@ -15,9 +15,8 @@ class FriendListTableViewController: UITableViewController {
     //var usernames : [String] = []
     //var userIds : [String] = []
     var friendsList : [String] = []
-    var friendsImage : [UIImage] = []
+    var friendsImage : [Int:UIImage] = [:]
     
-    //var refresh_Control:UIRefreshControl!
     
     var selectedUser = ""
     
@@ -43,35 +42,40 @@ class FriendListTableViewController: UITableViewController {
             } else {
                 print(error)
             }
+            self.populateImageData()
             self.tableView.reloadData()
         })
-        
-        /*
-        let query = PFUser.query()
-        
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-            if let users = objects {
-                self.userIds.removeAll(keepCapacity: true)
-                self.usernames.removeAll(keepCapacity: true)
-        
-                for object in users {
-                    if let user = object as? PFUser {
-                        if user.objectId! != PFUser.currentUser()?.objectId {
-                            self.usernames.append(user.username!)
-                            self.userIds.append(user.objectId!)
-                        }
-                    }
-                }
-            }
-        self.tableView.reloadData()
-        })
-        */
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func populateImageData() {
+        let query = PFQuery(className: "userData")
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+                for object in objects! {
+                    var i = 0
+                    if (object["username"] as! String) == self.friendsList[i] {
+                        let image = PFImageView()
+                        image.file = object["profileImage"] as? PFFile
+                        image.loadInBackground({ (photo, error) -> Void in
+                            if error == nil {
+                                self.friendsImage[i] = photo
+                                i++
+                            } else {
+                                print(error)
+                            }
+                        })
+                    }
+                }
+            } else {
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,27 +104,11 @@ class FriendListTableViewController: UITableViewController {
         //place holder image
         let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
         
-        //the following query attempts to fetch the profileImage from each cell's user and place it next to the cell
-        /*let query = PFQuery(className: "userData")
-        query.whereKey("username", equalTo: self.friendsList[indexPath.row])
-        
-        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
-            if error == nil {
-                let image = PFImageView()
-                image.file = object!["profileImage"] as? PFFile
-                image.loadInBackground({ (photo, error) -> Void in
-                    if error == nil {
-                        cellImage = photo!
-                        cell.imageView?.image = cellImage
-                        self.doSomethingAtClosure()
-                    } else {
-                        print(error)
-                    }
-                })
-            } else {
-                print(error)
-            }
-        }*/
+        if friendsImage[indexPath.row] != nil {
+            cell.imageView?.image = friendsImage[indexPath.row]
+        } else {
+            cell.imageView?.image = cellImage
+        }
         
         cell.imageView?.image = cellImage
         
@@ -145,14 +133,6 @@ class FriendListTableViewController: UITableViewController {
             svc.passedName = self.selectedUser;
             svc.isFollowing = true
         }
-        
-        /*if (segue.identifier == "viewFriendProfileSeaerchSegue"){
-            
-            let svc = segue.destinationViewController as! ViewFriendProfileViewController;
-            svc.passedName = self.selectedUser;
-            svc.isFollowing = false     //will cause friends that are searched to be false, need to fix!!
-        }*/
-        
     }
     
     //pull to refresh function

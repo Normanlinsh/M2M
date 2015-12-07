@@ -37,6 +37,11 @@ class ViewFriendProfileViewController: UIViewController {
                 image.loadInBackground({ (photo, error) -> Void in
                     if error == nil {
                         self.userProfileImage.image = photo!
+                        self.userProfileImage.layer.borderWidth = 1
+                        self.userProfileImage.layer.masksToBounds = false
+                        self.userProfileImage.layer.borderColor = UIColor.blackColor().CGColor
+                        self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.height/2
+                        self.userProfileImage.clipsToBounds = true
                     } else {
                         print(error)
                     }

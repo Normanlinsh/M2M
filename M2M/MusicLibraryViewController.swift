@@ -37,10 +37,10 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
         
-        data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
-        data0 = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+        //data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
+        //data0 = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
         
-        let query = PFQuery(className: "a123_audioFiles")
+        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
         query.whereKey("ownerUserName", equalTo: (PFUser.currentUser()?.username)!)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
@@ -151,7 +151,7 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         data1 = []
         
         //repopulate the new friendlist, there's definitely a more efficient way to do this, but i'm too lazy...
-        let query = PFQuery(className: "a123_audioFiles")
+        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
         query.whereKey("ownerUserName", equalTo: (PFUser.currentUser()?.username)!)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {

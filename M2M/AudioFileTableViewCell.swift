@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class AudioFileTableViewCell: UITableViewCell {
+class AudioFileTableViewCell: UITableViewCell, AVAudioPlayerDelegate {
     
     @IBOutlet var Title: UILabel!
     
@@ -31,11 +32,10 @@ class AudioFileTableViewCell: UITableViewCell {
     @IBAction func Play(sender: UIButton) {
     }
     
-    @IBAction func Append(sender: UIButton) {
+    @IBAction func Edit(sender: UIButton) {
     }
     
     @IBAction func Delete(sender: UIButton) {
-        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
