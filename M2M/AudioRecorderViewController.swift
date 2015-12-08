@@ -31,7 +31,6 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     
     @IBOutlet var Status: UILabel!
     
-    @IBOutlet var progressView: UIProgressView!
     
     override func viewDidLoad() {
         
@@ -58,7 +57,12 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             let s = String(format: "%02d:%02d", min, sec)
             Status.text = s
             recorder.updateMeters()
-        }
+            
+            //this part is for the progress bar
+            //let averageAudio = recorder.averagePowerForChannel(0) * -1
+            
+        } else if !recorder.recording {
+                    }
     }
     
     override func didReceiveMemoryWarning() {
@@ -362,6 +366,10 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             object:nil)
     }
     
+    func bar() {
+        
+    }
+    
     /*
     // MARK: - Navigation
     
@@ -402,5 +410,19 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
                 print("\(e.localizedDescription)")
             }
     }
+    
+    @IBOutlet var averageImageView: UIImageView!
+    func averageRadial (average: Int) {
+        switch average {
+        case average: averageImageView.image = UIImage(named: "average\(String(average))radial")
+        default: averageImageView.image = UIImage(named: "average0radial.png")
+        }
+    }
+    
+//    func crossfadeTransition() {
+//        let transition = CATransaction()
+//        transition. = kCATransitionFade
+//        transition. = 0.2
+//    }
 
 }
