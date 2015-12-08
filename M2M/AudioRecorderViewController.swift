@@ -31,6 +31,8 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     
     @IBOutlet var Status: UILabel!
     
+    @IBOutlet var progressView: UIProgressView!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
