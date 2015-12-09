@@ -16,8 +16,11 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     var player : AVAudioPlayer!
     var firstAudioFileData: NSData!
     var secondAudioFileData: NSData!
+    var secondAudioFile : PFFile!
     var fromLibrary = false
     var fromLibraryFileName = ""
+    
+    var url: NSURL!
     
     
     @IBOutlet var Play: UIButton!
@@ -67,20 +70,55 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     
-    //Play the recorded file
     @IBAction func Play(sender: UIButton) {
-        /*object! ["audioFile"].getDataInBackgroundWithBlock({ (data, error) -> Void in
-            if error == nil {
-                self.secondAudioFileData = data
-            }
-            else {
-                print(error)
-            }
-        })*/
+        /*
+        if player != nil && player.playing {
+            player.stop()
+        }
+        else {
+            object!["audioFile"].getDataInBackgroundWithBlock({ (data, error) -> Void in
+                if error == nil {
+                    self.secondAudioFileData = data
+                }
+                else {
+                    print(error)
+                }
+            })
+        }
+        */
     }
     
-    //Play the track from friend
     @IBAction func Play2(sender: UIButton) {
+        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        query.whereKey("audioName", equalTo: fromLibraryFileName)
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                self.secondAudioFile = object!["audioFile"] as? PFFile
+                self.secondAudioFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.secondAudioFileData = data
+                        self.playAudio(data!)
+                    } else {
+                        print(error)
+                    }
+                })
+            } else {
+                print(error)
+            }
+        }
+    }
+    
+    func playAudio(data: NSData) {
+        do {
+            self.player = try AVAudioPlayer(data: data)
+            player.delegate = self
+            player.prepareToPlay()
+            player.volume = 1.0
+            player.play()
+        } catch let error as NSError {
+            self.player = nil
+            print(error.localizedDescription)
+        }
     }
     
     //Allow the user to discard the current file and pick another one from the library
@@ -103,12 +141,12 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         super.viewDidLoad()
         loadFirstAudioFile()
         loadSecondAudioFile()
-        Play.enabled = false
-        Play2.enabled = false
+        
         // Do any additional setup after loading the view.
     }
-    
+    /*
     func append(audio1: NSData, audio2:  NSData) {
+        
         let composition = AVMutableComposition()
         var track1:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio,
             preferredTrackID: CMPersistentTrackID())
@@ -177,8 +215,8 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         var url2 = audio2
         
         
-        var avAsset1 = AVURLAsset(URL: url1, options: nil)
-        var avAsset2 = AVURLAsset(URL: url2, options: nil)
+        //var avAsset1 = AVURLAsset(URL: url1, options: nil)
+        //var avAsset2 = AVURLAsset(URL: url2, options: nil)
         
         var tracks1 =  avAsset1.tracksWithMediaType(AVMediaTypeAudio)
         var tracks2 =  avAsset2.tracksWithMediaType(AVMediaTypeAudio)
@@ -217,6 +255,8 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         })
 
     }
+    */
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

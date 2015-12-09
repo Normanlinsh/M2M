@@ -170,6 +170,7 @@
                                 <animations/>
                                 <state key="normal" title="Edit"/>
                                 <connections>
+                                    <action selector="Edit:" destination="YU8-xd-QMT" eventType="touchUpInside" id="THa-CJ-E4a"/>
                                     <action selector="EditorBtn:" destination="YU8-xd-QMT" eventType="touchUpInside" id="z6K-T2-fOF"/>
                                 </connections>
                             </button>
@@ -195,18 +196,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifT-n9-f8e">
-                                <rect key="frame" x="42" y="517" width="30" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGX-pv-gNC">
                                 <rect key="frame" x="222" y="517" width="42" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Play2"/>
                                 <connections>
+                                    <action selector="Play2:" destination="YU8-xd-QMT" eventType="touchUpInside" id="unw-9e-Uak"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Own-HE-ihr">
@@ -214,6 +209,7 @@
                                 <animations/>
                                 <state key="normal" title="Discard"/>
                                 <connections>
+                                    <action selector="Discard:" destination="YU8-xd-QMT" eventType="touchUpInside" id="pJi-Sv-Kem"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idM-K4-jtK">
@@ -222,6 +218,14 @@
                                 <state key="normal" title="Library"/>
                                 <connections>
                                     <segue destination="aIm-K5-oHX" kind="show" identifier="editorToLibrarySegue" id="x2c-hS-vsK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifT-n9-f8e">
+                                <rect key="frame" x="42" y="517" width="30" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="Play:" destination="YU8-xd-QMT" eventType="touchUpInside" id="KWQ-wx-dHP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -239,7 +243,13 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="Discard" destination="Own-HE-ihr" id="ScN-EI-wCo"/>
+                        <outlet property="Edit" destination="m66-Ev-GKF" id="8S1-5T-Evs"/>
+                        <outlet property="Id" destination="Opq-0D-ASd" id="E1B-nN-qu3"/>
+                        <outlet property="Id2" destination="5KP-cf-bpp" id="Qpu-fw-isA"/>
                         <outlet property="LibraryBtn" destination="idM-K4-jtK" id="TuX-Je-7eF"/>
+                        <outlet property="Play" destination="ifT-n9-f8e" id="jFj-hu-L4c"/>
+                        <outlet property="Play2" destination="FGX-pv-gNC" id="OU3-rU-nUZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KLY-mW-S1l" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -380,7 +390,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMT-9q-LjL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1427.5" y="-507.5"/>
+            <point key="canvasLocation" x="1441.5" y="-474.5"/>
         </scene>
         <!--Profile-->
         <scene sceneID="QKh-P4-o0J">
@@ -770,7 +780,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RUP-rU-oJu"/>
-        <segue reference="C9n-gX-Wcr"/>
+        <segue reference="IaS-qA-p9S"/>
         <segue reference="x2c-hS-vsK"/>
         <segue reference="MVt-AA-BEh"/>
     </inferredMetricsTieBreakers>
