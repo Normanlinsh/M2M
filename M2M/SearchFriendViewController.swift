@@ -16,9 +16,11 @@ class SearchFriendViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var searchActive : Bool = false
-    //var data : [String] = ["elephant", "tiger", "lion", "mouse", "horse", "zebra", "crocodile"]
+    
     var data : [String] = []
     var filtered : [String] = []
+    var friendsImageFile : [String:PFFile] = [:]
+    var friendsImage : [String:UIImage] = [:]
     
     var selectedUser = 0
     
@@ -38,6 +40,7 @@ class SearchFriendViewController: UIViewController {
                     }
                 }
             }
+            self.populateImageFile()
         })
         // Do any additional setup after loading the view.
     }
@@ -100,32 +103,18 @@ class SearchFriendViewController: UIViewController {
         
         
         let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
-        
-        //the following query attempts to fetch the profileImage from each cell's user and place it next to the cell
-        /*
-        let query = PFQuery(className: "userData")
-        query.whereKey("username", equalTo: self.filtered[indexPath.row])
-        
-        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
-            if error == nil {
-                let image = PFImageView()
-                image.file = object!["profileImage"] as? PFFile
-                image.loadInBackground({ (photo, error) -> Void in
-                    if error == nil {
-                        cellImage = photo!
-                        cell.imageView?.image = cellImage
-                        self.doSomethingAtClosure()
-                    } else {
-                        print(error)
-                    }
-                })
-            } else {
-                print(error)
-            }
+        if friendsImage[data[indexPath.row]] != nil {
+            cell.imageView?.image = friendsImage[data[indexPath.row]]
+            //cell.imageView?.layer.borderWidth = 1
+            //cell.imageView?.layer.masksToBounds = false
+            //cell.imageView?.layer.borderColor = UIColor.blackColor().CGColor
+            //cell.imageView?.layer.cornerRadius = cell.frame.height/2
+            //cell.imageView?.clipsToBounds = true
+        } else {
+            cell.imageView?.image = cellImage
         }
-        */
         
-        cell.imageView?.image = cellImage
+        //cell.imageView?.image = cellImage
         
         return cell
     }
@@ -160,6 +149,45 @@ class SearchFriendViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func populateImageFile() {
+        let query = PFQuery(className: "userData")
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+                for object in objects! {
+                    let username = object["username"] as! String
+                    
+                    if self.data.contains(username) {
+                        self.friendsImageFile[username] = object["profileImage"] as? PFFile
+                    }
+                    
+                }
+            } else {
+                print(error)
+            }
+            self.populateImageData()
+        }
+    }
+    
+    func populateImageData() {
+        let image = PFImageView()
+        var count = 1
+        
+        for friend in data {
+            image.file = friendsImageFile[friend]
+            image.loadInBackground({ (photo, error) -> Void in
+                if error == nil {
+                    self.friendsImage[friend] = photo
+                } else {
+                    print(error)
+                }
+                if count == self.data.count {
+                    self.tableView.reloadData()
+                }
+                count++
+            })
+        }
+    }
+
     
     
 

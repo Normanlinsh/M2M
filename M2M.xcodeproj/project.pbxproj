@@ -46,7 +46,6 @@
 		4080BA861C17DEAF000F61BB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080BA851C17DEAF000F61BB /* TabBarViewController.swift */; };
 		40ADD5EA1BFD88460031E177 /* sendToFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */; };
 		437C2F321BF36BFB0018F362 /* AudioEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */; };
-		437F96431C12371900F2F5D4 /* AudioFileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437F96421C12371900F2F5D4 /* AudioFileTableViewCell.swift */; };
 		B633784A1C16BD2A00A4B985 /* radial in Resources */ = {isa = PBXBuildFile; fileRef = B63378491C16BD2A00A4B985 /* radial */; };
 /* End PBXBuildFile section */
 
@@ -113,7 +112,6 @@
 		4080BA851C17DEAF000F61BB /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sendToFriendsViewController.swift; sourceTree = "<group>"; };
 		437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioEditorViewController.swift; sourceTree = "<group>"; };
-		437F96421C12371900F2F5D4 /* AudioFileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFileTableViewCell.swift; sourceTree = "<group>"; };
 		B63378491C16BD2A00A4B985 /* radial */ = {isa = PBXFileReference; lastKnownFileType = folder; path = radial; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,7 +204,6 @@
 				4026EF3F1BF4026C00EE18AB /* sendAudioViewController.swift */,
 				4026EF3B1BF3FFE500EE18AB /* AudioRecorderViewController.swift */,
 				437C2F311BF36BFB0018F362 /* AudioEditorViewController.swift */,
-				437F96421C12371900F2F5D4 /* AudioFileTableViewCell.swift */,
 				40ADD5E91BFD88460031E177 /* sendToFriendsViewController.swift */,
 				405A26ED1BF297FA0018818C /* MusicLibraryViewController.swift */,
 				405A26E71BF28F130018818C /* UserProfileViewController.swift */,
@@ -385,7 +382,6 @@
 				405A26F21BF2A3700018818C /* FriendListTableViewController.swift in Sources */,
 				405A26EE1BF297FA0018818C /* MusicLibraryViewController.swift in Sources */,
 				4080BA861C17DEAF000F61BB /* TabBarViewController.swift in Sources */,
-				437F96431C12371900F2F5D4 /* AudioFileTableViewCell.swift in Sources */,
 				437C2F321BF36BFB0018F362 /* AudioEditorViewController.swift in Sources */,
 				405A26E81BF28F130018818C /* UserProfileViewController.swift in Sources */,
 				407859A71BF2599B003F122B /* AppDelegate.swift in Sources */,

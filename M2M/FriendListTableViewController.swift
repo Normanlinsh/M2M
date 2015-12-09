@@ -15,7 +15,8 @@ class FriendListTableViewController: UITableViewController {
     //var usernames : [String] = []
     //var userIds : [String] = []
     var friendsList : [String] = []
-    var friendsImage : [Int:UIImage] = [:]
+    var friendsImageFile : [String:PFFile] = [:]
+    var friendsImage : [String:UIImage] = [:]
     
     
     var selectedUser = ""
@@ -45,11 +46,11 @@ class FriendListTableViewController: UITableViewController {
             self.friendsList.sortInPlace { (element1, element2) -> Bool in
                 return element1 < element2
             }
-            self.tableView.reloadData()
+            self.populateImageFile()
         })
         
         
-        populateImageData()
+        //populateImageData()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -58,38 +59,42 @@ class FriendListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    func populateImageData() {
+    func populateImageFile() {
         let query = PFQuery(className: "userData")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
-                for var i = 0; i<self.friendsList.count; i++ {
-                    //print(self.friendsList[i])
-                    for object in objects! {
-                        if (object["username"] as! String) == self.friendsList[i] {
-                            print(object["username"])
-                            
-                            let image = PFImageView()
-                            image.file = object["profileImage"] as? PFFile
-                            image.loadInBackground({ (photo, error) -> Void in
-                                if error == nil {
-                                    self.friendsImage[i] = photo
-                                    i++
-                                    //print("saved")
-                                } else {
-                                    print(error)
-                                }
-                                self.tableView.reloadData()
-                                print(self.friendsImage)
-                            })
-                            
-                        }
+                for object in objects! {
+                    let username = object["username"] as! String
+                    
+                    if self.friendsList.contains(username) {
+                        self.friendsImageFile[username] = object["profileImage"] as? PFFile
                     }
+                    
                 }
             } else {
                 print(error)
             }
-            print("hereeee")
-        self.tableView.reloadData()
+            self.populateImageData()
+        }
+    }
+    
+    func populateImageData() {
+        let image = PFImageView()
+        var count = 1
+        
+        for friend in friendsList {
+            image.file = friendsImageFile[friend]
+            image.loadInBackground({ (photo, error) -> Void in
+                if error == nil {
+                    self.friendsImage[friend] = photo
+                } else {
+                    print(error)
+                }
+                if count == self.friendsList.count {
+                    self.tableView.reloadData()
+                }
+                count++
+            })
         }
     }
 
@@ -119,9 +124,13 @@ class FriendListTableViewController: UITableViewController {
         //place holder image
         let cellImage : UIImage = UIImage(named: "SampleProfileImage.png")!
         
-        if friendsImage[indexPath.row] != nil {
-            cell.imageView?.image = friendsImage[indexPath.row]
-            print("here!!!")
+        if friendsImage[friendsList[indexPath.row]] != nil {
+            cell.imageView?.image = friendsImage[friendsList[indexPath.row]]
+            //cell.imageView?.layer.borderWidth = 1
+            //cell.imageView?.layer.masksToBounds = false
+            //cell.imageView?.layer.borderColor = UIColor.blackColor().CGColor
+            //cell.imageView?.layer.cornerRadius = cell.frame.height/2
+            //cell.imageView?.clipsToBounds = true
         } else {
             cell.imageView?.image = cellImage
         }

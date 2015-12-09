@@ -484,10 +484,10 @@
             </objects>
             <point key="canvasLocation" x="893.5" y="1158.5"/>
         </scene>
-        <!--Tab Bar View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="CB0-6r-TEQ">
             <objects>
-                <tabBarController id="qHu-ZP-DhI" customClass="TabBarViewController" customModule="M2M" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="qHu-ZP-DhI" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3Px-sa-nZP">
