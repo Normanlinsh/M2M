@@ -29,7 +29,8 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     var data0 : [String] = []
     var data1 : [String] = []
     
-    var audioFiles : [PFFile] = []
+    var audioFiles0 : [PFFile] = []
+    var audioFiles1 : [PFFile] = []
     var audioData : [NSData] = []
     
     var fromEditor = false
@@ -37,27 +38,61 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tabArray = self.tabBarController?.tabBar.items as NSArray!
+        let tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
+        tabItem.badgeValue = nil
+        
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
         
-        //data = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
-        //data0 = ["San Francisco","New York","San Jose","Chicago","Los Angeles","Austin","Seattle"]
-        
         let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
-        query.whereKey("ownerUserName", equalTo: (PFUser.currentUser()?.username)!)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 for object in objects!{
-                    self.data1.append(String(object["audioName"]))
-                    let file = object["audioFile"] as! PFFile
-                    self.audioFiles.append(file)
+                    if object["author"] as! String == (PFUser.currentUser()?.username)! {
+                        self.data1.append(String(object["audioName"]))
+                        let file = object["audioFile"] as! PFFile
+                        self.audioFiles1.append(file)
+                    } else {
+                        self.data0.append(String(object["audioName"]))
+                        let file = object["audioFile"] as! PFFile
+                        self.audioFiles0.append(file)
+                    }
                 }
             } else {
                 print(error)
             }
         }
+        
+        /*let deleteQuery = PFQuery(className: "sentAudioFiles")
+        deleteQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+                for object in objects!{
+                    if object["receiverUsername"] as! String == (PFUser.currentUser()?.username)! {
+                        object.deleteInBackground()
+                    }
+                }
+            } else {
+                print(error)
+            }
+        }*/
+        print((PFUser.currentUser()?.username)!)
+        let deleteQuery = PFQuery(className: "sentAudioFiles")
+        deleteQuery.whereKey("receiverUsername", equalTo: (PFUser.currentUser()?.username)!)
+        deleteQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+                for object in objects!{
+                    //object["notified"] = true
+                    object.deleteInBackground()
+                }
+            } else {
+                print(error)
+            }
+        }
+
+
         
         if fromEditor
         {
@@ -71,25 +106,16 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         // Do any additional setup after loading the view.
     }
     
-    
-    @IBAction func addFile(sender: AnyObject) {
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
         return data.count
-        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -104,6 +130,7 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        // if segued to library from editor, allow selecting function
         if fromEditor {
             let selectedCell:UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             if previouslySelectedFileIndexPath == nil {
@@ -134,27 +161,45 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     
     func play(index:Int) {
         
-        audioFiles[index].getDataInBackgroundWithBlock { (audioData: NSData?, error: NSError?) -> Void in
-            do {
-                try self.player = AVAudioPlayer(data: audioData!, fileTypeHint: AVFileTypeAppleM4A)
-                self.player.prepareToPlay()
-                self.player.volume = 1.0
-                self.player.play()
+        if currentCategory == 0 {
+            audioFiles0[index].getDataInBackgroundWithBlock { (audioData: NSData?, error: NSError?) -> Void in
+                do {
+                    try self.player = AVAudioPlayer(data: audioData!, fileTypeHint: AVFileTypeAppleM4A)
+                    self.player.prepareToPlay()
+                    self.player.volume = 1.0
+                    self.player.play()
+                }
+                catch let error as NSError {
+                    self.player = nil
+                    print(error.localizedDescription)
+                }
             }
-            catch let error as NSError {
-                self.player = nil
-                print(error.localizedDescription)
+        } else {
+            audioFiles1[index].getDataInBackgroundWithBlock { (audioData: NSData?, error: NSError?) -> Void in
+                do {
+                    try self.player = AVAudioPlayer(data: audioData!, fileTypeHint: AVFileTypeAppleM4A)
+                    self.player.prepareToPlay()
+                    self.player.volume = 1.0
+                    self.player.play()
+                }
+                catch let error as NSError {
+                    self.player = nil
+                    print(error.localizedDescription)
+                }
             }
         }
     }
     
     @IBAction func importAudio(sender: AnyObject) {
+        //var controller: UINavigationController
+        //controller = self.storyboard?.instantiateViewControllerWithIdentifier("NavigationVCIdentifierFromStoryboard") as! UINavigationController
+        //controller = self.storyboard?.
+        //controller.yourTableViewArray = localArrayValue
         //navigationController?.popViewControllerAnimated(true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "libraryToEditorSegue"){
-            
+        //if (segue.identifier == "libraryToEditorSegue"){
             let svc = segue.destinationViewController as! AudioEditorViewController;
             svc.fromLibrary = true
             if currentCategory == 0 {
@@ -162,12 +207,12 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
             } else {
                 svc.fromLibraryFileName = data1[selectedFileIndexRow]
             }
-        }
+        //}
     }
     
     
     func valueChanged(segmentedControl: UISegmentedControl) {
-        //print("Coming in : \(segmentedControl.selectedSegmentIndex)")
+
         
         if(segmentedControl.selectedSegmentIndex == 0){
             self.data = self.data0
@@ -191,13 +236,12 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
         
         //repopulate the new friendlist, there's definitely a more efficient way to do this, but i'm too lazy...
         let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
-        query.whereKey("ownerUserName", equalTo: (PFUser.currentUser()?.username)!)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 for object in objects!{
                     self.data1.append(String(object["audioName"]))
                     let file = object["audioFile"] as! PFFile
-                    self.audioFiles.append(file)
+                    self.audioFiles1.append(file)
                 }
             } else {
                 print(error)
@@ -209,7 +253,7 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     }
 
     override func viewWillAppear(animated: Bool) {
-        //refresh(self)
+        
     }
     
     /*

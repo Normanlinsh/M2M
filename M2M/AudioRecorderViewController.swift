@@ -33,8 +33,25 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     
     
     override func viewDidLoad() {
-        
+                
         super.viewDidLoad()
+        
+        var newCount = 0
+        
+        let query = PFQuery(className: "sentAudioFiles")
+        query.whereKey("receiverUsername", equalTo: (PFUser.currentUser()?.username)!)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+                newCount = (objects?.count)!
+                if newCount != 0 {
+                    let tabArray = self.tabBarController?.tabBar.items as NSArray!
+                    let tabItem = tabArray.objectAtIndex(1) as! UITabBarItem
+                    tabItem.badgeValue = String(newCount)
+                }
+            } else {
+                print(error)
+            }
+        }
         
         Stop.enabled = false
         Play.enabled = false
@@ -186,11 +203,10 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     
     func saveToParse(recordingName: String) {
         let soundFile = PFFile(name: recordingName, data: NSData(contentsOfURL: self.soundFileURL!)!)
-        let testClass = PFObject(className: "\((PFUser.currentUser()?.username)!)_audioFiles") //need to change
-        testClass["audioName"] = recordingName //need to change
+        let testClass = PFObject(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        testClass["audioName"] = recordingName
         testClass["audioFile"] = soundFile
-        testClass["ownerUserName"] = (PFUser.currentUser()?.username)!
-        testClass["author"] = "You"
+        testClass["author"] = (PFUser.currentUser()?.username)!
         testClass.saveInBackgroundWithBlock({ (success, error) -> Void in
             if error != nil {
                 print(error)
@@ -268,6 +284,12 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             if soundFileURL != nil {
                 let svc = segue.destinationViewController as! AudioEditorViewController
                 svc.url = self.soundFileURL!
+            }
+        }
+        if (segue.identifier == "editorToSenderSegue"){
+            if soundFileURL != nil {
+                let svc = segue.destinationViewController as! sendToFriendsViewController
+                //svc.url = self.soundFileURL!
             }
         }
     }

@@ -111,15 +111,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="dmC-zD-kQU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="musicLibraryCell" id="2tc-be-kuv">
-                                        <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2tc-be-kuv" id="o5t-Dn-Ifb">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -139,7 +139,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Add" id="srG-5B-m5P">
                             <connections>
                                 <action selector="importAudio:" destination="aIm-K5-oHX" id="18T-be-LY2"/>
-                                <segue destination="YU8-xd-QMT" kind="show" identifier="libraryToEditorSegue" id="44O-XY-QYM"/>
+                                <segue destination="YU8-xd-QMT" kind="show" id="C9n-gX-Wcr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -235,7 +235,7 @@
                     <navigationItem key="navigationItem" title="Editor" id="Y99-eW-zDI">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="1a9-qA-VF0">
                             <connections>
-                                <segue destination="oyp-6X-Kud" kind="show" id="sQo-js-a3L"/>
+                                <segue destination="oyp-6X-Kud" kind="show" identifier="editorToSenderSegue" id="sQo-js-a3L"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -270,7 +270,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FDi-ky-DUo" id="INF-an-gZk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
                                         </tableViewCellContentView>
@@ -289,13 +289,14 @@
                     <navigationItem key="navigationItem" title="Send to friend(s)" id="Dga-9o-HRo">
                         <barButtonItem key="rightBarButtonItem" title="Send" id="Wdg-zM-spH">
                             <connections>
-                                <action selector="send:" destination="oyp-6X-Kud" id="p10-E8-mNZ"/>
+                                <action selector="sendAudio:" destination="oyp-6X-Kud" id="NoC-nc-8ax"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="O9t-b5-H4w" id="1AP-rV-1uQ"/>
+                        <segue destination="qHu-ZP-DhI" kind="showDetail" identifier="finishedSendingSegue" id="RUP-rU-oJu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uDY-8Z-SG7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -483,10 +484,10 @@
             </objects>
             <point key="canvasLocation" x="893.5" y="1158.5"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="CB0-6r-TEQ">
             <objects>
-                <tabBarController id="qHu-ZP-DhI" sceneMemberID="viewController">
+                <tabBarController id="qHu-ZP-DhI" customClass="TabBarViewController" customModule="M2M" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3Px-sa-nZP">
@@ -519,7 +520,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K00-fL-Xwb" id="4gm-iw-ufF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                 </tableViewCellContentView>
@@ -588,11 +589,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W6J-Yt-9dc" id="IkX-us-MhI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AZp-JD-v64">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="74.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="74"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -753,8 +754,8 @@
                         <segue destination="g9b-Kb-WYR" kind="relationship" relationship="rootViewController" id="vJv-xH-8Gm"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ivy-VM-e0S" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationItem title="Recorder" id="gPJ-Ta-8oX"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ivy-VM-e0S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="893.5" y="-507.5"/>
         </scene>
@@ -771,8 +772,9 @@
         <image name="sampleRecorder.png" width="700" height="700"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MVt-AA-BEh"/>
-        <segue reference="IaS-qA-p9S"/>
+        <segue reference="RUP-rU-oJu"/>
+        <segue reference="C9n-gX-Wcr"/>
         <segue reference="x2c-hS-vsK"/>
+        <segue reference="MVt-AA-BEh"/>
     </inferredMetricsTieBreakers>
 </document>

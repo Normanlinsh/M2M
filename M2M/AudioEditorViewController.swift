@@ -63,6 +63,7 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate, UITabl
         // Do any additional setup after loading the view.
     }
     
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

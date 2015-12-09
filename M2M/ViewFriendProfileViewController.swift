@@ -117,8 +117,12 @@ class ViewFriendProfileViewController: UIViewController {
             isFollowing = true
         }
     }
+    /*
+    override func viewWillAppear(animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        nav?.barTintColor = UIColor(red: 52.0/255.0, green: 152.0/255.0, blue: 219.0/255.0, alpha: 1.0)
+    }*/
     
-
     /*
     // MARK: - Navigation
 
