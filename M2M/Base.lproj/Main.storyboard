@@ -409,50 +409,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Maskedbg" translatesAutoresizingMaskIntoConstraints="NO" id="8yv-JJ-6nz" userLabel="Background">
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
+                                <animations/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="VImage" translatesAutoresizingMaskIntoConstraints="NO" id="emd-Zw-mmC">
+                                <rect key="frame" x="0.0" y="254" width="375" height="369"/>
+                                <animations/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcB-D1-LwE" userLabel="FriendsNumber">
+                                <rect key="frame" x="204" y="403" width="100" height="50"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i13-bE-AwC">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <animations/>
                                 <items/>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ay-bJ-ud3">
-                                <rect key="frame" x="8" y="72" width="180" height="180"/>
+                                <rect key="frame" x="117" y="200" width="140" height="140"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JoY-lO-zQd">
-                                <rect key="frame" x="196" y="72" width="88" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSj-pl-hb6" userLabel="PointsNumber">
+                                <rect key="frame" x="56" y="403" width="100" height="50"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSj-pl-hb6">
-                                <rect key="frame" x="196" y="159" width="159" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHn-X4-sRh">
+                                <rect key="frame" x="107" y="141" width="160" height="40"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.12693975810756755" green="0.69400829515213835" blue="0.8837791982323232" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHn-X4-sRh">
-                                <rect key="frame" x="196" y="96" width="159" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHY-3G-P3R">
+                                <rect key="frame" x="83" y="450" width="47" height="22"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.37126647758483516" green="0.015589680262768886" blue="0.98064630681818177" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHY-3G-P3R">
-                                <rect key="frame" x="196" y="134" width="55" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8h-Kc-cun" userLabel="EditPicture">
+                                <rect key="frame" x="237" y="319" width="25" height="25"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8h-Kc-cun">
-                                <rect key="frame" x="8" y="250" width="180" height="33"/>
-                                <animations/>
-                                <color key="backgroundColor" red="1" green="0.85573150506024631" blue="0.37183513179336025" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <state key="normal" title="Update Profile Picture">
-                                    <color key="titleColor" red="0.14624906920535849" green="0.41219062367819426" blue="0.80600931186868685" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="edit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="0.93321664633288537" green="0.95924084595959591" blue="0.94319628894733443" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -460,23 +466,33 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nt-4G-vFj">
-                                <rect key="frame" x="196" y="252" width="72" height="30"/>
+                                <rect key="frame" x="107" y="542" width="160" height="28"/>
                                 <animations/>
-                                <state key="normal" title="Friend List"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Friend List" backgroundImage="barimage">
+                                    <color key="titleColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="PMN-wK-EKS" kind="show" id="3bO-70-fLY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWl-ge-25K">
-                                <rect key="frame" x="161" y="566" width="52" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uWl-ge-25K" userLabel="Logout">
+                                <rect key="frame" x="325" y="79" width="30" height="30"/>
                                 <animations/>
-                                <state key="normal" title="Log out">
+                                <state key="normal" image="logout">
                                     <color key="titleColor" red="1" green="0.040183829110187141" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="logOut:" destination="Wyw-Oh-dvL" eventType="touchUpInside" id="Cs2-U2-IYr"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyE-9B-gja">
+                                <rect key="frame" x="229" y="450" width="51" height="22"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -651,47 +667,64 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SampleImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="gdp-7i-EBx">
-                                <rect key="frame" x="8" y="72" width="180" height="180"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Maskedbg" translatesAutoresizingMaskIntoConstraints="NO" id="DgO-ve-w6a" userLabel="Background">
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <animations/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBn-6r-MOR">
-                                <rect key="frame" x="196" y="72" width="88" height="22"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="VImage" translatesAutoresizingMaskIntoConstraints="NO" id="zqG-nO-Ri1">
+                                <rect key="frame" x="0.0" y="254" width="375" height="369"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qp7-By-xM9">
+                                <rect key="frame" x="229" y="450" width="51" height="22"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF9-5h-xiu">
-                                <rect key="frame" x="196" y="125" width="55" height="22"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SampleImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="gdp-7i-EBx">
+                                <rect key="frame" x="117" y="200" width="140" height="140"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5r-GY-ifu">
-                                <rect key="frame" x="196" y="96" width="159" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.49875939568939176" green="0.012300067123532921" blue="0.98098169191919193" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIw-uS-vKH">
-                                <rect key="frame" x="196" y="151" width="159" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" red="0.0007122120039457703" green="0.69194710743655941" blue="0.85667219065656564" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxq-Lb-2pO">
-                                <rect key="frame" x="196" y="218" width="71" height="34"/>
+                                <rect key="frame" x="107" y="542" width="160" height="28"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Unfriend"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Unfriend" backgroundImage="barimage">
+                                    <color key="titleColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="addFriend:" destination="oNr-gr-llE" eventType="touchUpInside" id="kSQ-0W-PCJ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5r-GY-ifu">
+                                <rect key="frame" x="107" y="141" width="160" height="40"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6b-yw-0Na" userLabel="PointsNumber">
+                                <rect key="frame" x="56" y="403" width="100" height="50"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDR-P3-S86">
+                                <rect key="frame" x="83" y="450" width="47" height="22"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaJ-dn-HQN" userLabel="FriendsNumber">
+                                <rect key="frame" x="204" y="403" width="100" height="50"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -787,6 +820,10 @@
         <image name="SignupBtn" width="512" height="94"/>
         <image name="Stop" width="104" height="104"/>
         <image name="Twitter" width="134" height="132"/>
+        <image name="VImage" width="375" height="406"/>
+        <image name="barimage" width="206" height="51"/>
+        <image name="edit" width="37" height="38"/>
+        <image name="logout" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RUP-rU-oJu"/>
