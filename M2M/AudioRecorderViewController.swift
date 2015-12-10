@@ -98,7 +98,7 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
         
         if recorder == nil {
             print("recording. recorder nil")
-            Record.setTitle("Pause", forState: .Normal)
+            //Record.setTitle("Pause", forState: .Normal)
             Play.enabled = false
             Stop.enabled = true
             recordWithPermission(true)
@@ -108,10 +108,10 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
         if recorder != nil && recorder.recording {
             print("pausing")
             recorder.pause()
-            Record.setTitle("Continue", forState: .Normal)
+            //Record.setTitle("Continue", forState: .Normal)
         } else {
             print("recording")
-            Record.setTitle("Pause", forState: .Normal)
+            //Record.setTitle("Pause", forState: .Normal)
             Play.enabled = false
             Stop.enabled = true
             recordWithPermission(false)
