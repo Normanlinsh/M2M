@@ -23,7 +23,6 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFileButton: UIBarButtonItem!
-
     
     var data : [String] = []
     var data0 : [String] = []
@@ -32,6 +31,8 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
     var audioFiles0 : [PFFile] = []
     var audioFiles1 : [PFFile] = []
     var audioData : [NSData] = []
+    var newFiles : Int = 0
+    var point : Int = 0
     
     var fromEditor = false
     
@@ -66,18 +67,6 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
         
-        /*let deleteQuery = PFQuery(className: "sentAudioFiles")
-        deleteQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil {
-                for object in objects!{
-                    if object["receiverUsername"] as! String == (PFUser.currentUser()?.username)! {
-                        object.deleteInBackground()
-                    }
-                }
-            } else {
-                print(error)
-            }
-        }*/
         print((PFUser.currentUser()?.username)!)
         let deleteQuery = PFQuery(className: "sentAudioFiles")
         deleteQuery.whereKey("receiverUsername", equalTo: (PFUser.currentUser()?.username)!)
@@ -92,7 +81,19 @@ class MusicLibraryViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
 
-
+        let addPoints = PFQuery(className: "userData")
+        addPoints.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        addPoints.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                self.point = object!["points"] as! Int
+                self.point = self.point + (5 * self.newFiles)
+                print(self.point)
+                object!["points"] = self.point
+                object?.saveInBackground()
+            } else {
+                print(error)
+            }
+        }
         
         if fromEditor
         {
