@@ -125,7 +125,8 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
                     if error == nil {
                         self.firstAudioFileData = data
                         self.Id.text = fileName
-                        print(object!["audioName"])
+                        self.fromLibrary = false
+                        self.fromRecorder = false
                     }
                     else {
                         print(error)
@@ -148,6 +149,8 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
                     if error == nil {
                         self.secondAudioFileData = data
                         self.Id2.text = fileName
+                        self.fromLibrary = false
+                        self.fromRecorder = false
                     }
                     else {
                         print(error)
