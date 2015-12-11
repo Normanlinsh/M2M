@@ -16,6 +16,8 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var userId: UILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var friendsLabel: UILabel!
     
     //logout button
     
@@ -40,6 +42,10 @@ class UserProfileViewController: UIViewController, UINavigationControllerDelegat
                 image.file = object!["profileImage"] as? PFFile
                 image.loadInBackground({ (photo, error) -> Void in
                     if error == nil {
+                        self.pointsLabel.text = String(object!["points"])
+                        self.friendsLabel.text = String(object!["friendList"].count)
+                        
+                        //set profile image
                         self.userProfileImage.image = photo!
                         self.userProfileImage.layer.borderWidth = 1
                         self.userProfileImage.layer.masksToBounds = false

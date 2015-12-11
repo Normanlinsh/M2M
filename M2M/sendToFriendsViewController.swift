@@ -164,8 +164,19 @@ class sendToFriendsViewController: UIViewController {
                 }
             })
         }
-
-        
+        let addPoints = PFQuery(className: "userData")
+        addPoints.whereKey("username", equalTo: (PFUser.currentUser()?.username)!)
+        addPoints.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                var point = object!["points"] as! Int
+                point = point + (10 * self.selectedFriends.count)
+                print(point)
+                object!["points"] = point
+                object?.saveInBackground()
+            } else {
+                print(error)
+            }
+        }        
     }
     
     func createNotification() {
