@@ -23,6 +23,9 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
     
     var activitiyIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
+    //Reference to pass to the Editor
+    var latestRecordingName = ""
+    
     @IBOutlet var Record: UIButton!
     
     @IBOutlet var Play: UIButton!
@@ -227,6 +230,7 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             } else {
                 //saved to Parse!
                 print("saved to Parse")
+                self.latestRecordingName = recordingName
                 //ends activity indicator
                 self.activitiyIndicator.stopAnimating()
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -284,6 +288,8 @@ class AudioRecorderViewController: UIViewController, AVAudioRecorderDelegate, AV
             if soundFileURL != nil {
                 let svc = segue.destinationViewController as! AudioEditorViewController
                 svc.url = self.soundFileURL!
+                svc.fromRecorder = true
+                svc.fromRecorderFileName = self.latestRecordingName
             }
         }
         if (segue.identifier == "editorToSenderSegue"){

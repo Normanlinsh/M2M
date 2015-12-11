@@ -16,15 +16,17 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     var player : AVAudioPlayer!
     var firstAudioFileData: NSData!
     var secondAudioFileData: NSData!
+    var firstAudioFile: PFFile!
     var secondAudioFile : PFFile!
     var fromLibrary = false
+    var fromRecorder = false
     var fromLibraryFileName = ""
+    var fromRecorderFileName = ""
     
     var url: NSURL!
     
     
     @IBOutlet var Play: UIButton!
-    //implement stop functionality if pressed while playing
     
     @IBOutlet var Play2: UIButton!
     
@@ -36,7 +38,6 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
     @IBOutlet var Discard: UIButton!
    
-    //Let the user to go back to the library
     @IBOutlet var LibraryBtn: UIButton!
     
     
@@ -69,42 +70,26 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    
+    //need error checking for nil
     @IBAction func Play(sender: UIButton) {
-        /*
         if player != nil && player.playing {
             player.stop()
         }
-        else {
-            object!["audioFile"].getDataInBackgroundWithBlock({ (data, error) -> Void in
-                if error == nil {
-                    self.secondAudioFileData = data
-                }
-                else {
-                    print(error)
-                }
-            })
+        else if firstAudioFileData != nil {
+          self.playAudio(firstAudioFileData)
         }
-        */
+        else {
+        }
     }
     
     @IBAction func Play2(sender: UIButton) {
-        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
-        query.whereKey("audioName", equalTo: fromLibraryFileName)
-        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
-            if error == nil {
-                self.secondAudioFile = object!["audioFile"] as? PFFile
-                self.secondAudioFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
-                    if error == nil {
-                        self.secondAudioFileData = data
-                        self.playAudio(data!)
-                    } else {
-                        print(error)
-                    }
-                })
-            } else {
-                print(error)
-            }
+        if player != nil && player.playing {
+            player.stop()
+        }
+        else if secondAudioFileData != nil {
+            self.playAudio(secondAudioFileData!)
+        }
+        else {
         }
     }
     
@@ -123,29 +108,104 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
     
     //Allow the user to discard the current file and pick another one from the library
     @IBAction func Discard(sender: UIButton) {
-        //open table menu...
-        //play item from table menu
+        secondAudioFileData = nil
+        secondAudioFile = nil
+        fromLibrary = false
+        fromRecorder = false
+        Id2.text = "No File"
     }
     
-    func loadFirstAudioFile() {
-        
+    func loadFirstAudioFile(fileName: String) {
+        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        query.whereKey("audioName", equalTo: fileName)
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                self.firstAudioFile = object!["audioFile"] as? PFFile
+                self.firstAudioFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.firstAudioFileData = data
+                        self.Id.text = fileName
+                        print(object!["audioName"])
+                    }
+                    else {
+                        print(error)
+                    }
+                })
+            }
+            else {
+                print(error)
+            }
+        }
     }
     
-    func loadSecondAudioFile() {
-        
+    func loadSecondAudioFile(fileName: String) {
+        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
+        query.whereKey("audioName", equalTo: fileName)
+        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
+            if error == nil {
+                self.secondAudioFile = object!["audioFile"] as? PFFile
+                self.secondAudioFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                    if error == nil {
+                        self.secondAudioFileData = data
+                        self.Id2.text = fileName
+                    }
+                    else {
+                        print(error)
+                    }
+                })
+            }
+            else {
+                print(error)
+            }
+        }
     }
-
+  
+    override func viewWillAppear(animated: Bool) {
+        if fromLibrary {
+            if self.firstAudioFileData==nil {
+                loadFirstAudioFile(fromLibraryFileName)
+            }
+            else if self.secondAudioFileData==nil {
+                loadSecondAudioFile(fromLibraryFileName)
+            }
+            else {
+                let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
+                let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
+                alert.addAction(no)
+                let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
+                    self.loadSecondAudioFile(self.fromLibraryFileName)
+                }
+                alert.addAction(yes)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        else if fromRecorder {
+            if self.firstAudioFileData==nil {
+                loadFirstAudioFile(fromRecorderFileName)
+            }
+            else if self.secondAudioFileData==nil {
+                loadSecondAudioFile(fromRecorderFileName)
+            }
+            else {
+                let alert = UIAlertController(title: "Editor Full", message: "You already have two files in the editor. Would you like to replace one?", preferredStyle: .Alert)
+                let no = UIAlertAction(title: "No", style: .Cancel) {(action) in}
+                alert.addAction(no)
+                let yes = UIAlertAction(title: "Yes", style: .Default) {(action) in
+                    self.loadSecondAudioFile(self.fromRecorderFileName)
+                }
+                alert.addAction(yes)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+    }
     
-        
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadFirstAudioFile()
-        loadSecondAudioFile()
         
         // Do any additional setup after loading the view.
     }
-    /*
-    func append(audio1: NSData, audio2:  NSData) {
+    
+    /*func append(audio1: NSData, audio2:  NSData) {
         
         let composition = AVMutableComposition()
         var track1:AVMutableCompositionTrack = composition.addMutableTrackWithMediaType(AVMediaTypeAudio,
@@ -271,32 +331,5 @@ class AudioEditorViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        if fromLibrary {
-            retrieveFromParse(fromLibraryFileName)
-        }
-    }
-    
-    // retrieve the audio file from parse by the audio name passed from library
-    func retrieveFromParse(fileName: String) {
-        let query = PFQuery(className: "\((PFUser.currentUser()?.username)!)_audioFiles")
-        query.whereKey("audioName", equalTo: fileName)
-        query.getFirstObjectInBackgroundWithBlock { (object, error) -> Void in
-            /*if error == nil {
-                // :Mark, secondAudioFile is the audio file selected from Library. it is NSData, which can be easily played by AVAudioPlayer with play with data method
-                object!["audioFile"].getDataInBackgroundWithBlock({ (data, error) -> Void in
-                    if error == nil {
-                        self.secondAudioFileData = data
-                    } else {
-                        print(error)
-                    }
-                })
-            } else {
-                print(error)
-            }
-            */
-            print(object!["audioName"])
 
-        }
-    }
 }
