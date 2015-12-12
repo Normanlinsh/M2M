@@ -472,7 +472,6 @@
         <scene sceneID="CB0-6r-TEQ">
             <objects>
                 <tabBarController id="qHu-ZP-DhI" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3Px-sa-nZP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -679,11 +678,11 @@
             </objects>
             <point key="canvasLocation" x="1427.5" y="1963.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Library-->
         <scene sceneID="6fw-dw-dm7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fAu-46-6xx" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="ppY-x9-ohO"/>
+                    <tabBarItem key="tabBarItem" title="Library" image="library" id="ppY-x9-ohO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lkH-q1-4UO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -703,11 +702,11 @@
             </objects>
             <point key="canvasLocation" x="1427.5" y="344.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Profile-->
         <scene sceneID="tqc-re-Weu">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LjS-zo-zJ9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="msm-Bo-pvm"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="tabfriend" id="msm-Bo-pvm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TuD-Y6-sz8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -727,11 +726,11 @@
             </objects>
             <point key="canvasLocation" x="377.5" y="1158.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Recorder-->
         <scene sceneID="Dzm-WD-w04">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tp3-iQ-Agd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="C1e-do-Pi8"/>
+                    <tabBarItem key="tabBarItem" title="Recorder" image="tabrecorder" id="C1e-do-Pi8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qs8-Nu-OgN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -771,13 +770,16 @@
         <image name="VImage" width="375" height="406"/>
         <image name="barimage" width="206" height="51"/>
         <image name="edit" width="37" height="38"/>
+        <image name="library" width="30" height="27"/>
         <image name="logout" width="31" height="31"/>
+        <image name="tabfriend" width="30" height="30"/>
+        <image name="tabrecorder" width="15" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DXV-5B-fHn"/>
         <segue reference="IaS-qA-p9S"/>
         <segue reference="y7T-1u-t6k"/>
-        <segue reference="Z1K-ui-mst"/>
+        <segue reference="MVt-AA-BEh"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>
