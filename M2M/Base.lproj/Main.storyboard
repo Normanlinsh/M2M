@@ -122,6 +122,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Music Library" id="qhx-mG-3zq">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="srG-5B-m5P">
+                            <color key="tintColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="importAudio:" destination="aIm-K5-oHX" id="18T-be-LY2"/>
                                 <segue destination="YU8-xd-QMT" kind="show" id="C9n-gX-Wcr"/>
@@ -209,6 +210,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Editor" id="Y99-eW-zDI">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="1a9-qA-VF0">
+                            <color key="tintColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="oyp-6X-Kud" kind="show" identifier="editorToSenderSegue" id="sQo-js-a3L"/>
                             </connections>
@@ -265,6 +267,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Send to friend(s)" id="Dga-9o-HRo">
                         <barButtonItem key="rightBarButtonItem" title="Send" id="Wdg-zM-spH">
+                            <color key="tintColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="sendAudio:" destination="oyp-6X-Kud" id="NoC-nc-8ax"/>
                             </connections>
@@ -511,6 +514,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Friends" id="Sc7-hg-Dl9">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zer-DJ-O3l">
+                            <color key="tintColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="lbb-8V-lCE" kind="show" id="a99-w1-6YE"/>
                             </connections>
@@ -684,6 +688,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lkH-q1-4UO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -703,6 +712,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TuD-Y6-sz8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <color key="textColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -763,6 +777,7 @@
         <segue reference="DXV-5B-fHn"/>
         <segue reference="IaS-qA-p9S"/>
         <segue reference="y7T-1u-t6k"/>
-        <segue reference="MVt-AA-BEh"/>
+        <segue reference="Z1K-ui-mst"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.29803921570000003" green="0.49803921569999998" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>
